@@ -1,0 +1,50 @@
+{
+  "name": "emis-resource",
+  "description": "WIP",
+  "repository": "https://github.com/CodeTanzania/emis-resource.git",
+  "keywords": [
+    "codetanzania",
+    "lykmapipo",
+    "emis",
+    "emis-module",
+    "disaster",
+    "emergency",
+    "hazard",
+    "risk",
+    "loss",
+    "exposure",
+    "resilience",
+    "warning",
+    "assessment",
+    "drm",
+    "mitigation",
+    "preparedness",
+    "response",
+    "recovery",
+    "resource",
+    "material",
+    "equipment",
+    "consumable",
+    "item",
+    "stock",
+    "adjustment"
+  ],
+  "addons": [
+    "mongolab"
+  ],
+  "env":
+  {
+    "HEROKU":
+    {
+      "value": "true"
+    },
+    "NPM_CONFIG_PRODUCTION":
+    {
+      "value": "false"
+    },
+    "YARN_PRODUCTION":
+    {
+      "value": "false"
+    }
+  }
+}

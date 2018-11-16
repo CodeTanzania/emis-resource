@@ -1,0 +1,114 @@
+{
+  "name": "@codetanzania/emis-resource",
+  "version": "1.0.0",
+  "description": "WIP",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test",
+    "integration": "grunt integration",
+    "dev": "BASE_PATH=./examples node ./examples/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeTanzania/emis-resource.git"
+  },
+  "keywords": [
+    "codetanzania",
+    "lykmapipo",
+    "emis",
+    "emis-module",
+    "disaster",
+    "emergency",
+    "hazard",
+    "risk",
+    "loss",
+    "exposure",
+    "resilience",
+    "warning",
+    "assessment",
+    "drm",
+    "mitigation",
+    "preparedness",
+    "response",
+    "recovery",
+    "resource",
+    "material",
+    "equipment",
+    "consumable",
+    "item",
+    "stock",
+    "adjustment"
+  ],
+  "contributors": [{
+    "name": "lykmapipo",
+    "email": "lallyelias87@gmail.com",
+    "url": "https://github.com/lykmapipo"
+  }],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeTanzania/emis-resource/issues",
+    "email": "lallyelias87@gmail.com"
+  },
+  "homepage": "https://github.com/CodeTanzania/emis-resource",
+  "sandbox": {
+    "url": "https://emis-resource.herokuapp.com",
+    "apiDoc": "https://codetanzania.github.io/emis-resource/",
+    "client_id": "",
+    "client_secret": "",
+    "urls": [{
+      "resource": "Item",
+      "schema": "https://emis-resource.herokuapp.com/v1/items/schema",
+      "link": "https://emis-resource.herokuapp.com/v1/items",
+      "scopes": [
+        "item:*"
+      ],
+      "methods": [
+        "get",
+        "post",
+        "put",
+        "patch",
+        "delete"
+      ]
+    }]
+  },
+  "devDependencies": {
+    "@benmaruchu/faker": "^4.2.1",
+    "@codetanzania/majifix-common": "^0.11.1",
+    "@lykmapipo/express-common": "^0.9.3",
+    "async": "^2.6.1",
+    "chai": "^4.2.0",
+    "express": "^4.16.4",
+    "grunt": "^1.0.3",
+    "grunt-apidoc": "^0.11.0",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-mocha-test": "^0.13.3",
+    "jshint-stylish": "^2.2.1",
+    "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.12",
+    "mongoose-rest-actions": "^0.20.2",
+    "mongoose-schema-jsonschema": "^1.1.15",
+    "sinon": "^7.1.1",
+    "sinon-chai": "^3.2.0",
+    "sinon-mongoose": "^2.2.1",
+    "supertest": "^3.3.0"
+  },
+  "peerDependencies": {
+    "@lykmapipo/express-common": "^0.9.3",
+    "async": "^2.6.1",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "mongoose-rest-actions": "^0.20.2",
+    "mongoose-schema-jsonschema": "^1.1.15"
+  },
+  "dependencies": {
+    "randomcolor": "^0.5.3"
+  },
+  "engines": {
+    "node": ">=8.11.1",
+    "npm": ">=5.6.0"
+  }
+}

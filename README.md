@@ -1,7 +1,12 @@
 # emis-resource
 
+[![Build Status](https://travis-ci.org/CodeTanzania/emis-resource.svg?branch=develop)](https://travis-ci.org/CodeTanzania/emis-resource)
+[![Dependencies Status](https://david-dm.org/CodeTanzania/emis-resource/status.svg?style=flat-square)](https://david-dm.org/CodeTanzania/emis-resource)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/CodeTanzania/emis-resource/tree/develop)
+
 > WIP
 
+[Demo](https://emis-resource.herokuapp.com/v1/items)
 
 ## Domain Model
 
@@ -26,6 +31,11 @@ npm install @codetanzania/emis-resource --save
 const { app } = require('@codetanzania/emis-resource');
 app.start((error) => { ... });
 ```
+
+## Demo
+- [View Demo](https://emis-resource.herokuapp.com/v1/items)
+- [View apidoc](https://codetanzania.github.io/emis-resource/)
+
 
 ## Testing
 
@@ -53,7 +63,11 @@ npm test
 
 It will be nice, if you open an issue first so that we can know what is going on, then, fork this repo and push in your ideas. Do not forget to add a bit of test(s) of what value you adding.
 
-## License
+
+## References
+- [Disaster](https://en.wikipedia.org/wiki/Disaster)
+
+## Licence
 
 The MIT License (MIT)
 
