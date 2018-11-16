@@ -66,6 +66,9 @@ It will be nice, if you open an issue first so that we can know what is going on
 
 ## References
 - [Disaster](https://en.wikipedia.org/wiki/Disaster)
+- [FEMA - Emergency Response Resource Requirements](https://www.fema.gov/media-library/assets/documents/89520)
+- [Unit of Measure Codes ](https://www.doa.la.gov/osp/Vendorcenter/docs/unitofmeasurecodes.pdf)
+- [UOM for Line Items](https://www.urmc.rochester.edu/purchasing/documents/um.pdf)
 
 ## Licence
 

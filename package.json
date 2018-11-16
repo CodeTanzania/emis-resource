@@ -39,11 +39,13 @@
     "stock",
     "adjustment"
   ],
-  "contributors": [{
-    "name": "lykmapipo",
-    "email": "lallyelias87@gmail.com",
-    "url": "https://github.com/lykmapipo"
-  }],
+  "contributors": [
+    {
+      "name": "lykmapipo",
+      "email": "lallyelias87@gmail.com",
+      "url": "https://github.com/lykmapipo"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CodeTanzania/emis-resource/issues",
@@ -55,21 +57,23 @@
     "apiDoc": "https://codetanzania.github.io/emis-resource/",
     "client_id": "",
     "client_secret": "",
-    "urls": [{
-      "resource": "Item",
-      "schema": "https://emis-resource.herokuapp.com/v1/items/schema",
-      "link": "https://emis-resource.herokuapp.com/v1/items",
-      "scopes": [
-        "item:*"
-      ],
-      "methods": [
-        "get",
-        "post",
-        "put",
-        "patch",
-        "delete"
-      ]
-    }]
+    "urls": [
+      {
+        "resource": "Item",
+        "schema": "https://emis-resource.herokuapp.com/v1/items/schema",
+        "link": "https://emis-resource.herokuapp.com/v1/items",
+        "scopes": [
+          "item:*"
+        ],
+        "methods": [
+          "get",
+          "post",
+          "put",
+          "patch",
+          "delete"
+        ]
+      }
+    ]
   },
   "devDependencies": {
     "@benmaruchu/faker": "^4.2.1",
