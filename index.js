@@ -51,6 +51,7 @@ exports.info = _.merge({}, _.pick(pkg, fields));
 
 /* export models */
 exports.Item = require(path.join(__dirname, 'lib', 'item.model'));
+exports.Stock = require(path.join(__dirname, 'lib', 'stock.model'));
 exports.Adjustment = require(path.join(__dirname, 'lib', 'adjustment.model'));
 
 
