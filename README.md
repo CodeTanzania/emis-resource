@@ -67,6 +67,7 @@ It will be nice, if you open an issue first so that we can know what is going on
 ## References
 - [Resource](https://en.wikipedia.org/wiki/Resource)
 - [Inventory](https://en.wikipedia.org/wiki/Inventory)
+- [Resource Management](https://en.wikipedia.org/wiki/Resource_management)
 - [Disaster](https://en.wikipedia.org/wiki/Disaster)
 - [FEMA - Emergency Response Resource Requirements](https://www.fema.gov/media-library/assets/documents/89520)
 - [Unit of Measure Codes ](https://www.doa.la.gov/osp/Vendorcenter/docs/unitofmeasurecodes.pdf)
