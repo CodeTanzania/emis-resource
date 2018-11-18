@@ -5,10 +5,28 @@
 const path = require('path');
 const { expect } = require('chai');
 const { Schema } = require('mongoose');
+const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock } = require(path.join(__dirname, '..', '..'));
 
 
 describe('Stock Schema', () => {
+
+  it('should have owner field', () => {
+    const owner = Stock.path('owner');
+
+    expect(owner).to.exist;
+    expect(owner).to.be.an.instanceof(Schema.Types.ObjectId);
+    expect(owner.options).to.exist;
+    expect(owner.options).to.be.an('object');
+    expect(owner.options.type).to.exist;
+    expect(owner.options.ref).to.exist;
+    expect(owner.options.ref).to.be.eql(Party.MODEL_NAME);
+    expect(owner.options.required).to.be.true;
+    expect(owner.options.index).to.be.true;
+    expect(owner.options.exists).to.be.true;
+    expect(owner.options.autopopulate).to.exist;
+    expect(owner.options.autopopulate).to.be.an('object');
+  });
 
   it('should have item field', () => {
     const item = Stock.path('item');
