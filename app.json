@@ -1,6 +1,6 @@
 {
   "name": "emis-resource",
-  "description": "WIP",
+  "description": "A representation of item and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
   "repository": "https://github.com/CodeTanzania/emis-resource.git",
   "keywords": [
     "codetanzania",
@@ -11,11 +11,8 @@
     "emergency",
     "hazard",
     "risk",
-    "loss",
     "exposure",
     "resilience",
-    "warning",
-    "assessment",
     "drm",
     "mitigation",
     "preparedness",

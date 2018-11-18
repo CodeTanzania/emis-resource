@@ -4,7 +4,7 @@
 [![Dependencies Status](https://david-dm.org/CodeTanzania/emis-resource/status.svg?style=flat-square)](https://david-dm.org/CodeTanzania/emis-resource)
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/CodeTanzania/emis-resource/tree/develop)
 
-> WIP
+A representation of item(i.e materials, services, staff, assets etc.) and it stock that may be consumed or made available in emergency(or disaster) management(or event).
 
 [Demo](https://emis-resource.herokuapp.com/v1/items)
 

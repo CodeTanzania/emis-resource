@@ -4,9 +4,17 @@
 /**
  * @name emis-resource
  * @module emis-resource
- * @description WIP
+ * @description A representation of item(i.e materials, services, staff,
+ * assets etc.) and it stock that may be consumed or made available in
+ * emergency(or disaster) management(or event).
  *
+ * @see {@link https://en.wikipedia.org/wiki/Resource}
+ * @see {@link https://en.wikipedia.org/wiki/Inventory}
+ * @see {@link https://en.wikipedia.org/wiki/Resource_management}
  * @see {@link https://en.wikipedia.org/wiki/Disaster}
+ * @see {@link https://www.fema.gov/media-library/assets/documents/89520}
+ * @see {@link https://www.doa.la.gov/osp/Vendorcenter/docs/unitofmeasurecodes.pdf}
+ * @see {@link https://www.urmc.rochester.edu/purchasing/documents/um.pdf}
  *
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
@@ -25,14 +33,14 @@
 /* dependencies */
 const path = require('path');
 const _ = require('lodash');
+const pkg = require(path.join(__dirname, 'package.json'));
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
 const app = require('@lykmapipo/express-common');
 
 
-/* declarations */
-const pkg = require(path.join(__dirname, 'package.json'));
-const fields = [
+/* extract information from package.json */
+exports.info = _.merge({}, _.pick(pkg, [
   'name',
   'description',
   'version',
@@ -42,11 +50,7 @@ const fields = [
   'bugs',
   'sandbox',
   'contributors'
-];
-
-
-/* extract information from package.json */
-exports.info = _.merge({}, _.pick(pkg, fields));
+]));
 
 
 /* export models */

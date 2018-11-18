@@ -1,7 +1,7 @@
 {
   "name": "@codetanzania/emis-resource",
   "version": "1.0.0",
-  "description": "WIP",
+  "description": "A representation of item(i.e materials, services, staff, assets etc.) and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
@@ -21,11 +21,8 @@
     "emergency",
     "hazard",
     "risk",
-    "loss",
     "exposure",
     "resilience",
-    "warning",
-    "assessment",
     "drm",
     "mitigation",
     "preparedness",
