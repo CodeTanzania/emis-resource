@@ -82,9 +82,9 @@ describe('Item Statics', () => {
     expect(Item.UOMS).to.be.eql(_.orderBy(_.map([
       'bag', 'box', 'carton',
       'drum', 'dozen', 'gallon',
-      'kit', 'pallet', 'unit',
-      'piece', 'bucket', 'bottle',
-      'crate'
+      'kit', 'pallet', 'piece',
+      'bucket', 'bottle', 'crate',
+      'set', 'bale', 'roll', 'unit'
     ], _.toLower)));
   });
 
