@@ -79,6 +79,7 @@
     "@codetanzania/majifix-common": "^0.11.1",
     "@lykmapipo/env": "^0.3.2",
     "@lykmapipo/express-common": "^0.9.3",
+    "@lykmapipo/mongoose-test-helpers": "^0.1.1",
     "@lykmapipo/permission": "^0.4.1",
     "@lykmapipo/postman": "^0.5.1",
     "async": "^2.6.1",
