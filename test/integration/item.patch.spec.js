@@ -7,7 +7,8 @@ const { expect } = require('chai');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
 const { Item } = require(path.join(__dirname, '..', '..'));
 
-describe('Item Static Delete', () => {
+
+describe('Item Static Patch', () => {
 
   before(done => clear('Item', done));
 
@@ -20,21 +21,24 @@ describe('Item Static Delete', () => {
     });
   });
 
-  it('should be able to delete', (done) => {
-    Item.del(item._id, (error, deleted) => {
+  it('should be able to patch', (done) => {
+    item = item.fakeOnly('name');
+    Item.patch(item._id, item, (error, updated) => {
       expect(error).to.not.exist;
-      expect(deleted).to.exist;
-      expect(deleted._id).to.eql(item._id);
-      done(error, deleted);
+      expect(updated).to.exist;
+      expect(updated._id).to.eql(item._id);
+      expect(updated.name).to.eql(item.name);
+      done(error, updated);
     });
   });
 
   it('should throw if not exists', (done) => {
-    Item.del(item._id, (error, deleted) => {
+    const fake = Item.fake();
+    Item.patch(fake._id, fake, (error, updated) => {
       expect(error).to.exist;
       expect(error.status).to.exist;
       expect(error.message).to.be.equal('Not Found');
-      expect(deleted).to.not.exist;
+      expect(updated).to.not.exist;
       done();
     });
   });
@@ -43,7 +47,8 @@ describe('Item Static Delete', () => {
 
 });
 
-describe('Item Instance Delete', () => {
+
+describe('Item Instance Patch', () => {
 
   before(done => clear('Item', done));
 
@@ -56,20 +61,22 @@ describe('Item Instance Delete', () => {
     });
   });
 
-  it('should be able to delete', (done) => {
-    item.del((error, deleted) => {
+  it('should be able to patch', (done) => {
+    item = item.fakeOnly('name');
+    item.patch((error, updated) => {
       expect(error).to.not.exist;
-      expect(deleted).to.exist;
-      expect(deleted._id).to.eql(item._id);
-      done(error, deleted);
+      expect(updated).to.exist;
+      expect(updated._id).to.eql(item._id);
+      expect(updated.name).to.eql(item.name);
+      done(error, updated);
     });
   });
 
   it('should throw if not exists', (done) => {
-    item.del((error, deleted) => {
+    item.patch((error, updated) => {
       expect(error).to.not.exist;
-      expect(deleted).to.exist;
-      expect(deleted._id).to.eql(item._id);
+      expect(updated).to.exist;
+      expect(updated._id).to.eql(item._id);
       done();
     });
   });
