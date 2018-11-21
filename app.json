@@ -1,0 +1,48 @@
+{
+  "name": "emis-resource",
+  "description": "A representation of item and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
+  "repository": "https://github.com/CodeTanzania/emis-resource.git",
+  "keywords": [
+    "codetanzania",
+    "lykmapipo",
+    "emis",
+    "emis-module",
+    "disaster",
+    "emergency",
+    "hazard",
+    "risk",
+    "exposure",
+    "resilience",
+    "drm",
+    "mitigation",
+    "preparedness",
+    "response",
+    "recovery",
+    "resource",
+    "material",
+    "equipment",
+    "consumable",
+    "item",
+    "stock",
+    "adjustment"
+  ],
+  "addons": [
+    "mongolab",
+    "heroku-redis"
+  ],
+  "env":
+  {
+    "HEROKU":
+    {
+      "value": "true"
+    },
+    "NPM_CONFIG_PRODUCTION":
+    {
+      "value": "false"
+    },
+    "YARN_PRODUCTION":
+    {
+      "value": "false"
+    }
+  }
+}
