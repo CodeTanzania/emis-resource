@@ -96,7 +96,7 @@
     "mocha": "^5.2.0",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
-    "mongoose": "^5.3.12",
+    "mongoose": "^5.3.13",
     "mongoose-geojson-schemas": "^0.8.2",
     "mongoose-kue": "^0.7.1",
     "mongoose-rest-actions": "^0.20.2",
