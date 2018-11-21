@@ -8,9 +8,13 @@ process.env.MONGODB_URI =
 
 /* dependencies */
 const path = require('path');
+const _ = require('lodash');
+const { waterfall } = require('async');
 const mongoose = require('mongoose');
+const { Party } = require('@codetanzania/emis-stakeholder');
 const {
   Item,
+  Stock,
   apiVersion,
   info,
   app
@@ -20,8 +24,26 @@ const {
 /* connect to mongoose */
 mongoose.connect(process.env.MONGODB_URI);
 
+waterfall([
+  (next) => { Party.seed(next); },
 
-Item.seed(( /*error, results*/ ) => {
+  (parties, next) => {
+    Item.seed((error, items) => next(error, parties, items));
+  },
+
+  (parties, items, next) => {
+    const stocks = _.map(items, (item, index) => {
+      return {
+        owner: parties[index % parties.length],
+        item: item,
+        quantity: Math.ceil(Math.random() * 1000),
+        minAllowed: Math.ceil(Math.random() * 10),
+        maxAllowed: Math.ceil(Math.random() * 10000),
+      };
+    });
+    Stock.insertMany(stocks, next);
+  }
+], ( /*error , results*/ ) => {
 
   /* expose module info */
   app.get('/', (request, response) => {
