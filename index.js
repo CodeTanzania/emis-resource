@@ -60,11 +60,11 @@ exports.Adjustment = require(path.join(__dirname, 'lib', 'adjustment.model'));
 
 
 /* export routers*/
-// exports.itemRouter = require(path.join(__dirname, 'lib', 'item.http.router'));
+exports.itemRouter = require(path.join(__dirname, 'lib', 'item.http.router'));
 
 
 /* export router api version */
-// exports.apiVersion = itemRouter.apiVersion;
+exports.apiVersion = exports.itemRouter.apiVersion;
 
 
 /* export app */
@@ -73,8 +73,8 @@ Object.defineProperty(exports, 'app', {
 
     //TODO bind oauth middlewares authenticate, token, authorize
 
-    /* bind incident type router */
-    // app.mount(itemRouter);
+    /* bind routers */
+    app.mount(exports.itemRouter);
     return app;
   }
 
