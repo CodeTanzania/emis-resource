@@ -27,7 +27,8 @@
     "adjustment"
   ],
   "addons": [
-    "mongolab"
+    "mongolab",
+    "heroku-redis"
   ],
   "env":
   {
