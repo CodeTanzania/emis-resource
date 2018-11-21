@@ -84,6 +84,21 @@
           "patch",
           "delete"
         ]
+      },
+      {
+        "resource": "Adjustment",
+        "schema": "https://emis-resource.herokuapp.com/v1/adjustments/schema",
+        "link": "https://emis-resource.herokuapp.com/v1/adjustments",
+        "scopes": [
+          "adjustment:*"
+        ],
+        "methods": [
+          "get",
+          "post",
+          "put",
+          "patch",
+          "delete"
+        ]
       }
     ]
   },

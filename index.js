@@ -62,6 +62,8 @@ exports.Adjustment = require(path.join(__dirname, 'lib', 'adjustment.model'));
 /* export routers*/
 exports.itemRouter = require(path.join(__dirname, 'lib', 'item.http.router'));
 exports.stockRouter = require(path.join(__dirname, 'lib', 'stock.http.router'));
+exports.adjustmentRouter =
+  require(path.join(__dirname, 'lib', 'adjustment.http.router'));
 
 
 /* export router api version */
@@ -77,6 +79,7 @@ Object.defineProperty(exports, 'app', {
     /* bind routers */
     app.mount(exports.itemRouter);
     app.mount(exports.stockRouter);
+    app.mount(exports.adjustmentRouter);
     return app;
   }
 

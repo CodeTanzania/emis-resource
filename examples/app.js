@@ -15,6 +15,7 @@ const { Party } = require('@codetanzania/emis-stakeholder');
 const {
   Item,
   Stock,
+  Adjustment,
   apiVersion,
   info,
   app
@@ -41,9 +42,22 @@ waterfall([
         maxAllowed: Math.ceil(Math.random() * 10000),
       };
     });
-    Stock.insertMany(stocks, next);
+    Stock.seed(stocks, (error /*, stocks*/ ) => next(error, items));
+  },
+
+  (items, next) => {
+    const adjustments = _.map(items, (item) => {
+      const adjustment = Adjustment.fake();
+      adjustment.item = item;
+      adjustment.quantity = Math.ceil(Math.random() * 100);
+      adjustment.cost = Math.ceil(Math.random() * 10000);
+      return adjustment;
+    });
+    Adjustment.insertMany(adjustments, next);
   }
-], ( /*error , results*/ ) => {
+], (error /*, results*/ ) => {
+
+  console.log(error);
 
   /* expose module info */
   app.get('/', (request, response) => {
