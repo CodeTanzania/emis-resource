@@ -1,4 +1,5 @@
 # 1.1.0 / 07-12-2018
+- Build latest apidoc
 - Refactor adjustment integration specs to include stock, store and party
 - Add warehouse router
 - Add warehouse router specs
