@@ -5,17 +5,26 @@
 const path = require('path');
 const { expect } = require('chai');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
+const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock } = require(path.join(__dirname, '..', '..'));
 
 
 describe('Stock Static Put', () => {
 
-  before(done => clear('Stock', 'Item', 'Party', done));
+  before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
+  let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
+
+  before((done) => {
+    store.post((error, created) => {
+      store = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     owner.post((error, created) => {
@@ -32,6 +41,7 @@ describe('Stock Static Put', () => {
   });
 
   before((done) => {
+    stock.store = store;
     stock.owner = owner;
     stock.item = item;
     stock.post((error, created) => {
@@ -62,18 +72,26 @@ describe('Stock Static Put', () => {
     });
   });
 
-  after(done => clear('Stock', 'Item', 'Party', done));
+  after(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
 });
 
 
 describe('Stock Instance Put', () => {
 
-  before(done => clear('Stock', 'Item', 'Party', done));
+  before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
+  let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
+
+  before((done) => {
+    store.post((error, created) => {
+      store = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     owner.post((error, created) => {
@@ -90,6 +108,7 @@ describe('Stock Instance Put', () => {
   });
 
   before((done) => {
+    stock.store = store;
     stock.owner = owner;
     stock.item = item;
     stock.post((error, created) => {
@@ -118,6 +137,6 @@ describe('Stock Instance Put', () => {
     });
   });
 
-  after(done => clear('Stock', 'Item', 'Party', done));
+  after(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
 });
