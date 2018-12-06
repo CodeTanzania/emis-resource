@@ -5,14 +5,36 @@
 const path = require('path');
 const { expect } = require('chai');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
-const { Item, Adjustment } = require(path.join(__dirname, '..', '..'));
+const { Feature } = require('@codetanzania/emis-feature');
+const { Party } = require('@codetanzania/emis-stakeholder');
+const { Item, Stock, Adjustment } = require(path.join(__dirname, '..', '..'));
+
 
 describe('Adjustment Static Post', () => {
 
-  before(done => clear('Adjustment', 'Item', 'Party', done));
+  before(done => {
+    clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
+  });
 
+  let store = Feature.fake();
+  let owner = Party.fake();
   let item = Item.fake();
+  let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    store.post((error, created) => {
+      store = created;
+      done(error, created);
+    });
+  });
+
+  before((done) => {
+    owner.post((error, created) => {
+      owner = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     item.post((error, created) => {
@@ -21,27 +43,67 @@ describe('Adjustment Static Post', () => {
     });
   });
 
-  it('should be able to post', (done) => {
-    adjustment.item = item;
-    Adjustment.post(adjustment, (error, created) => {
-      expect(error).to.not.exist;
-      expect(created).to.exist;
-      expect(created._id).to.eql(adjustment._id);
-      expect(created.item._id).to.eql(adjustment.item._id);
+  before((done) => {
+    stock.store = store;
+    stock.owner = owner;
+    stock.item = item;
+    stock.post((error, created) => {
+      stock = created;
       done(error, created);
     });
   });
 
-  after(done => clear('Adjustment', 'Item', 'Party', done));
+  before((done) => {
+    adjustment.item = item;
+    adjustment.stock = stock;
+    adjustment.store = store;
+    adjustment.party = owner;
+    done();
+  });
+
+
+  it('should be able to post', (done) => {
+    Adjustment.post(adjustment, (error, updated) => {
+      expect(error).to.not.exist;
+      expect(updated).to.exist;
+      expect(updated._id).to.eql(adjustment._id);
+      expect(updated.quantity).to.eql(adjustment.quantity);
+      done(error, updated);
+    });
+  });
+
+  after(done => {
+    clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
+  });
 
 });
 
+
 describe('Adjustment Instance Post', () => {
 
-  before(done => clear('Adjustment', 'Item', 'Party', done));
+  before(done => {
+    clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
+  });
 
+  let store = Feature.fake();
+  let owner = Party.fake();
   let item = Item.fake();
+  let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    store.post((error, created) => {
+      store = created;
+      done(error, created);
+    });
+  });
+
+  before((done) => {
+    owner.post((error, created) => {
+      owner = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     item.post((error, created) => {
@@ -50,17 +112,37 @@ describe('Adjustment Instance Post', () => {
     });
   });
 
-  it('should be able to post', (done) => {
-    adjustment.item = item;
-    adjustment.post((error, created) => {
-      expect(error).to.not.exist;
-      expect(created).to.exist;
-      expect(created._id).to.eql(adjustment._id);
-      expect(created.item._id).to.eql(adjustment.item._id);
+  before((done) => {
+    stock.store = store;
+    stock.owner = owner;
+    stock.item = item;
+    stock.post((error, created) => {
+      stock = created;
       done(error, created);
     });
   });
 
-  after(done => clear('Adjustment', 'Item', 'Party', done));
+  before((done) => {
+    adjustment.item = item;
+    adjustment.stock = stock;
+    adjustment.store = store;
+    adjustment.party = owner;
+    done();
+  });
+
+
+  it('should be able to post', (done) => {
+    adjustment.post((error, updated) => {
+      expect(error).to.not.exist;
+      expect(updated).to.exist;
+      expect(updated._id).to.eql(adjustment._id);
+      expect(updated.quantity).to.eql(adjustment.quantity);
+      done(error, updated);
+    });
+  });
+
+  after(done => {
+    clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
+  });
 
 });

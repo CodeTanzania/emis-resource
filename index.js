@@ -37,13 +37,18 @@ const pkg = require(path.join(__dirname, 'package.json'));
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
 const app = require('@lykmapipo/express-common');
-const Item = require(path.join(__dirname, 'lib', 'item.model'));
-const Stock = require(path.join(__dirname, 'lib', 'stock.model'));
-const Adjustment = require(path.join(__dirname, 'lib', 'adjustment.model'));
-const itemRouter = require(path.join(__dirname, 'lib', 'item.http.router'));
-const stockRouter = require(path.join(__dirname, 'lib', 'stock.http.router'));
-const adjustmentRouter =
-  require(path.join(__dirname, 'lib', 'adjustment.http.router'));
+const { Feature: Warehouse } = require('@codetanzania/emis-feature');
+
+
+/* includes */
+const include = require('include')(__dirname);
+const Item = include('lib/item.model');
+const Stock = include('lib/stock.model');
+const Adjustment = include('lib/adjustment.model');
+const warehouseRouter = include('lib/warehouse.http.router');
+const itemRouter = include('lib/item.http.router');
+const stockRouter = include('lib/stock.http.router');
+const adjustmentRouter = include('lib/adjustment.http.router');
 
 
 /**
@@ -59,6 +64,18 @@ exports.info = _.merge({}, _.pick(pkg, [
   'name', 'description', 'version', 'license',
   'homepage', 'repository', 'bugs', 'sandbox', 'contributors'
 ]));
+
+
+/**
+ * @name Warehouse
+ * @description Warehouse model
+ * @type {mongoose.Model}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.Warehouse = Warehouse;
 
 
 /**
@@ -95,6 +112,18 @@ exports.Stock = Stock;
  * @version 0.1.0
  */
 exports.Adjustment = Adjustment;
+
+
+/**
+ * @name warehouseRouter
+ * @description warehouse http router
+ * @type {express.Router}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.warehouseRouter = warehouseRouter;
 
 
 /**
@@ -149,6 +178,7 @@ exports.apiVersion = itemRouter.apiVersion;
 Object.defineProperty(exports, 'app', {
   get() {
     /* @todo bind oauth middlewares authenticate, token, authorize */
+    app.mount(exports.warehouseRouter);
     app.mount(exports.itemRouter);
     app.mount(exports.stockRouter);
     app.mount(exports.adjustmentRouter);

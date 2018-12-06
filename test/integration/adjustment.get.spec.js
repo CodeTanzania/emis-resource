@@ -6,15 +6,36 @@ const path = require('path');
 const _ = require('lodash');
 const { expect } = require('chai');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
-const { Item, Adjustment } = require(path.join(__dirname, '..', '..'));
+const { Feature } = require('@codetanzania/emis-feature');
+const { Party } = require('@codetanzania/emis-stakeholder');
+const { Item, Stock, Adjustment } = require(path.join(__dirname, '..', '..'));
 
 
 describe('Adjustment Get', () => {
 
-  before(done => clear('Adjustment', 'Item', 'Party', done));
+  before(done => {
+    clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
+  });
 
-  let adjustments = Adjustment.fake(32);
+  let store = Feature.fake();
+  let owner = Party.fake();
   let items = Item.fake(32);
+  let stocks = Stock.fake(32);
+  let adjustments = Adjustment.fake(32);
+
+  before((done) => {
+    store.post((error, created) => {
+      store = created;
+      done(error, created);
+    });
+  });
+
+  before((done) => {
+    owner.post((error, created) => {
+      owner = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     Item.insertMany(items, (error, created) => {
@@ -24,9 +45,25 @@ describe('Adjustment Get', () => {
   });
 
   before((done) => {
-    adjustments = _.map(adjustments, (stock, index) => {
+    stocks = _.map(stocks, (stock, index) => {
+      stock.store = store;
+      stock.owner = owner;
       stock.item = items[index];
       return stock;
+    });
+    Stock.insertMany(stocks, (error, created) => {
+      stocks = created;
+      done(error, created);
+    });
+  });
+
+  before((done) => {
+    adjustments = _.map(adjustments, (adjustment, index) => {
+      adjustment.item = items[index];
+      adjustment.stock = stocks[index];
+      adjustment.store = store;
+      adjustment.party = owner;
+      return adjustment;
     });
     Adjustment.insertMany(adjustments, (error, created) => {
       adjustments = created;
@@ -131,6 +168,8 @@ describe('Adjustment Get', () => {
     });
   });
 
-  after(done => clear('Adjustment', 'Item', 'Party', done));
+  after(done => {
+    clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
+  });
 
 });

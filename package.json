@@ -151,6 +151,7 @@
     "mongoose-schema-jsonschema": ">=1.1.15"
   },
   "dependencies": {
+    "include": "^1.1.0",
     "randomcolor": "^0.5.3"
   },
   "engines": {

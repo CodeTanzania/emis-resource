@@ -52,13 +52,16 @@ waterfall([
         maxAllowed: Math.ceil(Math.random() * 10000),
       };
     });
-    Stock.seed(stocks, (error /*, stocks*/ ) => next(error, items));
+    Stock.seed(stocks, (error, stocks) => next(error, items, stocks));
   },
 
-  (items, next) => {
-    const adjustments = _.map(items, (item) => {
+  (items, stocks, next) => {
+    const adjustments = _.map(items, (item, index) => {
       const adjustment = Adjustment.fake();
       adjustment.item = item;
+      adjustment.stock = stocks[index];
+      adjustment.store = stocks[index].store;
+      adjustment.party = stocks[index].owner;
       adjustment.quantity = Math.ceil(Math.random() * 100);
       adjustment.cost = Math.ceil(Math.random() * 10000);
       return adjustment;
