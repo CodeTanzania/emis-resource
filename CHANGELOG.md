@@ -1,3 +1,11 @@
+# 1.1.0 / 07-12-2018
+- Refactor adjustment integration specs to include stock, store and party
+- Add warehouse router
+- Add warehouse router specs
+- Improve main export jsdoc
+- Add stock field in adjustment
+- Add store field in adjustment
+
 # 1.0.0 / 21-11-2018
 - Implement initial item, stock, adjustment data model
 - Implement item, stock and ajustment http routers
