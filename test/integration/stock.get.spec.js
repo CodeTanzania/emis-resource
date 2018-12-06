@@ -6,17 +6,26 @@ const path = require('path');
 const _ = require('lodash');
 const { expect } = require('chai');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
+const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock } = require(path.join(__dirname, '..', '..'));
 
 
 describe('Stock Get', () => {
 
-  before(done => clear('Stock', 'Item', 'Party', done));
+  before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
+  let store = Feature.fake();
   let owner = Party.fake();
   let stocks = Stock.fake(32);
   let items = Item.fake(32);
+
+  before((done) => {
+    store.post((error, created) => {
+      store = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     owner.post((error, created) => {
@@ -34,6 +43,7 @@ describe('Stock Get', () => {
 
   before((done) => {
     stocks = _.map(stocks, (stock, index) => {
+      stock.store = store;
       stock.owner = owner;
       stock.item = items[index];
       return stock;
@@ -141,6 +151,6 @@ describe('Stock Get', () => {
     });
   });
 
-  after(done => clear('Stock', 'Item', 'Party', done));
+  after(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
 });
