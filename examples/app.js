@@ -11,7 +11,8 @@ const path = require('path');
 const _ = require('lodash');
 const { waterfall } = require('async');
 const mongoose = require('mongoose');
-const { Party } = require('@codetanzania/emis-stakeholder');
+const { Feature, featureRouter } = require('@codetanzania/emis-feature');
+const { Party, partyRouter } = require('@codetanzania/emis-stakeholder');
 const {
   Item,
   Stock,
@@ -25,6 +26,10 @@ const {
 /* connect to mongoose */
 mongoose.connect(process.env.MONGODB_URI);
 
+
+app.mount(featureRouter);
+app.mount(partyRouter);
+
 waterfall([
   (next) => { Party.seed(next); },
 
@@ -33,8 +38,13 @@ waterfall([
   },
 
   (parties, items, next) => {
+    Feature.seed((error, features) => next(error, parties, items, features));
+  },
+
+  (parties, items, features, next) => {
     const stocks = _.map(items, (item, index) => {
       return {
+        store: features[index % features.length],
         owner: parties[index % parties.length],
         item: item,
         quantity: Math.ceil(Math.random() * 1000),

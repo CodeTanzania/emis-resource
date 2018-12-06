@@ -104,6 +104,7 @@
   },
   "devDependencies": {
     "@benmaruchu/faker": "^4.2.1",
+    "@codetanzania/emis-feature": "^1.0.2",
     "@codetanzania/emis-role": "^1.0.4",
     "@codetanzania/emis-stakeholder": "^1.1.1",
     "@codetanzania/majifix-common": "^0.11.1",
@@ -140,6 +141,7 @@
   },
   "peerDependencies": {
     "@lykmapipo/express-common": ">=0.9.3",
+    "@codetanzania/emis-feature": ">=1.0.2",
     "@codetanzania/emis-stakeholder": ">=1.1.1",
     "async": ">=2.6.1",
     "express": ">=4.16.4",
