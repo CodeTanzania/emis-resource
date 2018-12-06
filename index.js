@@ -37,46 +37,118 @@ const pkg = require(path.join(__dirname, 'package.json'));
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
 const app = require('@lykmapipo/express-common');
-
-
-/* extract information from package.json */
-exports.info = _.merge({}, _.pick(pkg, [
-  'name',
-  'description',
-  'version',
-  'license',
-  'homepage',
-  'repository',
-  'bugs',
-  'sandbox',
-  'contributors'
-]));
-
-
-/* export models */
-exports.Item = require(path.join(__dirname, 'lib', 'item.model'));
-exports.Stock = require(path.join(__dirname, 'lib', 'stock.model'));
-exports.Adjustment = require(path.join(__dirname, 'lib', 'adjustment.model'));
-
-
-/* export routers*/
-exports.itemRouter = require(path.join(__dirname, 'lib', 'item.http.router'));
-exports.stockRouter = require(path.join(__dirname, 'lib', 'stock.http.router'));
-exports.adjustmentRouter =
+const Item = require(path.join(__dirname, 'lib', 'item.model'));
+const Stock = require(path.join(__dirname, 'lib', 'stock.model'));
+const Adjustment = require(path.join(__dirname, 'lib', 'adjustment.model'));
+const itemRouter = require(path.join(__dirname, 'lib', 'item.http.router'));
+const stockRouter = require(path.join(__dirname, 'lib', 'stock.http.router'));
+const adjustmentRouter =
   require(path.join(__dirname, 'lib', 'adjustment.http.router'));
 
 
-/* export router api version */
-exports.apiVersion = exports.itemRouter.apiVersion;
+/**
+ * @name info
+ * @description package information
+ * @type {Object}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.info = _.merge({}, _.pick(pkg, [
+  'name', 'description', 'version', 'license',
+  'homepage', 'repository', 'bugs', 'sandbox', 'contributors'
+]));
+
+
+/**
+ * @name Item
+ * @description Item model
+ * @type {mongoose.Model}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.Item = Item;
+
+
+/**
+ * @name Stock
+ * @description Stock model
+ * @type {mongoose.Model}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.Stock = Stock;
+
+
+/**
+ * @name Adjustment
+ * @description Adjustment model
+ * @type {mongoose.Model}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.Adjustment = Adjustment;
+
+
+/**
+ * @name itemRouter
+ * @description item http router
+ * @type {express.Router}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.itemRouter = itemRouter;
+
+
+/**
+ * @name stockRouter
+ * @description stock http router
+ * @type {express.Router}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.stockRouter = stockRouter;
+
+
+/**
+ * @name adjustmentRouter
+ * @description adjustment http router
+ * @type {express.Router}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.adjustmentRouter = adjustmentRouter;
+
+
+/**
+ * @name apiVersion
+ * @description http router api version
+ * @type {String}
+ *
+ * @author lally elias <lallyelias87@gmail.com>
+ * @since 1.0.0
+ * @version 0.1.0
+ */
+exports.apiVersion = itemRouter.apiVersion;
 
 
 /* export app */
 Object.defineProperty(exports, 'app', {
   get() {
-
-    //TODO bind oauth middlewares authenticate, token, authorize
-
-    /* bind routers */
+    /* @todo bind oauth middlewares authenticate, token, authorize */
     app.mount(exports.itemRouter);
     app.mount(exports.stockRouter);
     app.mount(exports.adjustmentRouter);
