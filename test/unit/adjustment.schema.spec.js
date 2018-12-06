@@ -5,7 +5,8 @@
 const path = require('path');
 const { expect } = require('chai');
 const { Schema } = require('mongoose');
-const { Item, Adjustment } = require(path.join(__dirname, '..', '..'));
+const { Feature } = require('@codetanzania/emis-feature');
+const { Item, Stock, Adjustment } = require(path.join(__dirname, '..', '..'));
 
 
 describe('Adjustment Schema', () => {
@@ -61,6 +62,40 @@ describe('Adjustment Schema', () => {
     expect(item.options.exists).to.be.true;
     expect(item.options.autopopulate).to.exist;
     expect(item.options.autopopulate).to.be.an('object');
+  });
+
+  it('should have stock field', () => {
+    const stock = Adjustment.path('stock');
+
+    expect(stock).to.exist;
+    expect(stock).to.be.an.instanceof(Schema.Types.ObjectId);
+    expect(stock.options).to.exist;
+    expect(stock.options).to.be.an('object');
+    expect(stock.options.type).to.exist;
+    expect(stock.options.ref).to.exist;
+    expect(stock.options.ref).to.be.eql(Stock.MODEL_NAME);
+    // expect(stock.options.required).to.be.true;
+    expect(stock.options.index).to.be.true;
+    expect(stock.options.exists).to.be.true;
+    // expect(stock.options.autopopulate).to.exist;
+    // expect(stock.options.autopopulate).to.be.an('object');
+  });
+
+  it('should have store field', () => {
+    const store = Adjustment.path('store');
+
+    expect(store).to.exist;
+    expect(store).to.be.an.instanceof(Schema.Types.ObjectId);
+    expect(store.options).to.exist;
+    expect(store.options).to.be.an('object');
+    expect(store.options.type).to.exist;
+    expect(store.options.ref).to.exist;
+    expect(store.options.ref).to.be.eql(Feature.MODEL_NAME);
+    // expect(store.options.required).to.be.true;
+    expect(store.options.index).to.be.true;
+    expect(store.options.exists).to.be.true;
+    // expect(store.options.autopopulate).to.exist;
+    // expect(store.options.autopopulate).to.be.an('object');
   });
 
   it('should have quantity field', () => {
