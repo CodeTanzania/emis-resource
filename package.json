@@ -1,6 +1,6 @@
 {
   "name": "@codetanzania/emis-resource",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A representation of item(i.e materials, services, staff, assets etc.) and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
   "main": "index.js",
   "scripts": {
@@ -151,8 +151,8 @@
     "mongoose-schema-jsonschema": ">=1.1.15"
   },
   "dependencies": {
-    "include": "^1.1.0",
-    "randomcolor": "^0.5.3"
+    "include": ">=1.1.0",
+    "randomcolor": ">=0.5.3"
   },
   "engines": {
     "node": ">=8.11.1",
