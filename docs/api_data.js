@@ -76,7 +76,7 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Object",
+            "type": "Item",
             "optional": false,
             "field": "item",
             "description": "<p>An item under which stock adjustment is performed.</p>"
@@ -234,7 +234,7 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Object",
+            "type": "Item",
             "optional": false,
             "field": "item",
             "description": "<p>An item under which stock adjustment is performed.</p>"
@@ -416,7 +416,7 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "Adjustment[]",
             "optional": false,
             "field": "data",
             "description": "<p>List of adjustments</p>"
@@ -444,7 +444,7 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Object",
+            "type": "Item",
             "optional": false,
             "field": "data.item",
             "description": "<p>An item under which stock adjustment is performed.</p>"
@@ -651,7 +651,7 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Object",
+            "type": "Item",
             "optional": false,
             "field": "item",
             "description": "<p>An item under which stock adjustment is performed.</p>"
@@ -809,7 +809,7 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Object",
+            "type": "Item",
             "optional": false,
             "field": "item",
             "description": "<p>An item under which stock adjustment is performed.</p>"
@@ -967,7 +967,7 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Object",
+            "type": "Item",
             "optional": false,
             "field": "item",
             "description": "<p>An item under which stock adjustment is performed.</p>"
@@ -1523,7 +1523,7 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "Item[]",
             "optional": false,
             "field": "data",
             "description": "<p>List of items</p>"
@@ -2688,7 +2688,7 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "Stock[]",
             "optional": false,
             "field": "data",
             "description": "<p>List of stocks</p>"
