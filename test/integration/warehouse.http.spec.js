@@ -10,7 +10,7 @@ const { Warehouse, apiVersion, app } = require(path.join(__dirname, '..', '..'))
 const CATEGORY_BUILDING = 'Building';
 const TYPE_WAREHOUSE = 'Warehouse';
 
-describe.only('Warehouse Rest API', function () {
+describe('Warehouse Rest API', function () {
 
   before(done => clear('Feature', done));
 

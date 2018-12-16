@@ -1,6 +1,6 @@
 define({
   "name": "emis-resource",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A representation of item(i.e materials, services, staff, assets etc.) and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
   "title": "EMIS - Resource",
   "url": "https://emis-resource.herokuapp.com/v1",
@@ -13,7 +13,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-12-06T22:01:40.716Z",
+    "time": "2018-12-16T20:26:20.925Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }
