@@ -105,6 +105,7 @@
   "devDependencies": {
     "@benmaruchu/faker": "^4.2.1",
     "@codetanzania/majifix-common": "^0.11.1",
+    "@lykmapipo/mongoose-test-helpers": "^0.2.3",
     "chai": "^4.2.0",
     "grunt": "^1.0.3",
     "grunt-apidoc": "^0.11.0",
@@ -123,11 +124,12 @@
     "mongoose": ">=5.4.0"
   },
   "dependencies": {
-    "@lykmapipo/express-common": ">=0.9.4",
     "@codetanzania/emis-feature": ">=1.1.0",
     "@codetanzania/emis-stakeholder": ">=1.2.0",
+    "@lykmapipo/env": "^0.3.2",
+    "@lykmapipo/express-common": ">=0.9.4",
+    "@lykmapipo/include": "^0.1.0",
     "async": ">=2.6.1",
-    "include": ">=1.1.0",
     "lodash": ">=4.17.11",
     "mongoose-rest-actions": ">=0.22.2",
     "randomcolor": ">=0.5.3"

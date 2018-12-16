@@ -31,24 +31,21 @@
 
 
 /* dependencies */
-const path = require('path');
 const _ = require('lodash');
-const pkg = require(path.join(__dirname, 'package.json'));
-const mongoose = require('mongoose');
-require('mongoose-schema-jsonschema')(mongoose);
+const { include } = require('@lykmapipo/include');
 const app = require('@lykmapipo/express-common');
 const { Feature: Warehouse } = require('@codetanzania/emis-feature');
 
 
 /* includes */
-const include = require('include')(__dirname);
-const Item = include('lib/item.model');
-const Stock = include('lib/stock.model');
-const Adjustment = include('lib/adjustment.model');
-const warehouseRouter = include('lib/warehouse.http.router');
-const itemRouter = include('lib/item.http.router');
-const stockRouter = include('lib/stock.http.router');
-const adjustmentRouter = include('lib/adjustment.http.router');
+const pkg = include(__dirname, 'package.json');
+const Item = include(__dirname, 'lib', 'item.model');
+const Stock = include(__dirname, 'lib', 'stock.model');
+const Adjustment = include(__dirname, 'lib', 'adjustment.model');
+const warehouseRouter = include(__dirname, 'lib', 'warehouse.http.router');
+const itemRouter = include(__dirname, 'lib', 'item.http.router');
+const stockRouter = include(__dirname, 'lib', 'stock.http.router');
+const adjustmentRouter = include(__dirname, 'lib', 'adjustment.http.router');
 
 
 /**

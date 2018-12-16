@@ -102,7 +102,6 @@ describe('Stock Get', () => {
   });
 
   it.skip('should be able to search with options', (done) => {
-    // wait search by relations
     const options = { filter: { q: items[0].name } };
     Stock.get(options, (error, results) => {
       expect(error).to.not.exist;
@@ -127,7 +126,6 @@ describe('Stock Get', () => {
   });
 
   it.skip('should parse filter options', (done) => {
-    // wait search by relations
     const options = { filter: { name: items[0].name } };
     Stock.get(options, (error, results) => {
       expect(error).to.not.exist;

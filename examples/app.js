@@ -9,8 +9,9 @@ process.env.MONGODB_URI =
 /* dependencies */
 const path = require('path');
 const _ = require('lodash');
+const { include } = require('@lykmapipo/include');
 const { waterfall } = require('async');
-const mongoose = require('mongoose');
+const { connect } = require('@lykmapipo/mongoose-common');
 const { Feature, featureRouter } = require('@codetanzania/emis-feature');
 const { Party, partyRouter } = require('@codetanzania/emis-stakeholder');
 const {
@@ -20,69 +21,69 @@ const {
   apiVersion,
   info,
   app
-} = require(path.join(__dirname, '..'));
+} = include(__dirname, '..');
 
 
-/* connect to mongoose */
-mongoose.connect(process.env.MONGODB_URI);
-
-
-app.mount(featureRouter);
-app.mount(partyRouter);
-
-waterfall([
-  (next) => { Party.seed(next); },
-
-  (parties, next) => {
-    Item.seed((error, items) => next(error, parties, items));
-  },
-
-  (parties, items, next) => {
-    Feature.seed((error, features) => next(error, parties, items, features));
-  },
-
-  (parties, items, features, next) => {
-    const stocks = _.map(items, (item, index) => {
-      return {
-        store: features[index % features.length],
-        owner: parties[index % parties.length],
-        item: item,
-        quantity: Math.ceil(Math.random() * 1000),
-        minAllowed: Math.ceil(Math.random() * 10),
-        maxAllowed: Math.ceil(Math.random() * 10000),
-      };
-    });
-    Stock.seed(stocks, (error, stocks) => next(error, items, stocks));
-  },
-
-  (items, stocks, next) => {
-    const adjustments = _.map(items, (item, index) => {
-      const adjustment = Adjustment.fake();
-      adjustment.item = item;
-      adjustment.stock = stocks[index];
-      adjustment.store = stocks[index].store;
-      adjustment.party = stocks[index].owner;
-      adjustment.quantity = Math.ceil(Math.random() * 100);
-      adjustment.cost = Math.ceil(Math.random() * 10000);
-      return adjustment;
-    });
-    Adjustment.insertMany(adjustments, next);
-  }
-], (error /*, results*/ ) => {
-
-  console.log(error);
-
-  /* expose module info */
-  app.get('/', (request, response) => {
-    response.status(200);
-    response.json(info);
+// seeds
+const seedParties = (next) => Party.seed(next);
+const seedItems = (parties, next) => {
+  Item.seed((error, items) => next(error, parties, items));
+};
+const seedFeatures = (parties, items, next) => {
+  Feature.seed((error, features) => next(error, parties, items, features));
+};
+const seedStocks = (parties, items, features, next) => {
+  const stocks = _.map(items, (item, index) => {
+    return {
+      store: features[index % features.length],
+      owner: parties[index % parties.length],
+      item: item,
+      quantity: Math.ceil(Math.random() * 1000),
+      minAllowed: Math.ceil(Math.random() * 10),
+      maxAllowed: Math.ceil(Math.random() * 10000),
+    };
   });
+  Stock.seed(stocks, (error, stocks) => next(error, items, stocks));
+};
+const seedAdjustments = (items, stocks, next) => {
+  const adjustments = _.map(items, (item, index) => {
+    const adjustment = Adjustment.fake();
+    adjustment.item = item;
+    adjustment.stock = stocks[index];
+    adjustment.store = stocks[index].store;
+    adjustment.party = stocks[index].owner;
+    adjustment.quantity = Math.ceil(Math.random() * 100);
+    adjustment.cost = Math.ceil(Math.random() * 10000);
+    return adjustment;
+  });
+  Adjustment.insertMany(adjustments, next);
+};
 
-  /* fire the app */
-  app.start((error, env) => {
-    console.log(
-      `visit http://0.0.0.0:${env.PORT}/v${apiVersion}/items`
-    );
+
+// establish mongodb connection
+connect((error) => {
+
+  // seed
+  waterfall([
+    seedParties, seedItems,
+    seedFeatures, seedStocks,
+    seedAdjustments
+  ], (error, results) => {
+
+    // expose module info
+    app.get('/', (request, response) => {
+      response.status(200);
+      response.json(info);
+    });
+
+    app.mount(featureRouter);
+    app.mount(partyRouter);
+
+    // fire the app
+    app.start((error, env) => {
+      console.log(`visit http://0.0.0.0:${env.PORT}`);
+    });
+
   });
 
 });
