@@ -1,3 +1,7 @@
+# 1.2.1 / 17-12-2018
+- Force latest emis-stakeholder dependency
+- Build latest apidoc
+
 # 1.1.0 / 07-12-2018
 - Build latest apidoc
 - Improve example app
