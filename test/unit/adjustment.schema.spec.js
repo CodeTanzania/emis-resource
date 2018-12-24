@@ -2,11 +2,11 @@
 
 
 /* dependencies */
-const path = require('path');
 const { expect } = require('chai');
+const { include } = require('@lykmapipo/include');
 const { Schema } = require('mongoose');
 const { Feature } = require('@codetanzania/emis-feature');
-const { Item, Stock, Adjustment } = require(path.join(__dirname, '..', '..'));
+const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 
 
 describe('Adjustment Schema', () => {

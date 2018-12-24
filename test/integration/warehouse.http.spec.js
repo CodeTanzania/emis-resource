@@ -2,11 +2,11 @@
 
 
 /* dependencies */
-const path = require('path');
 const request = require('supertest');
 const { expect } = require('chai');
+const { include } = require('@lykmapipo/include');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
-const { Warehouse, apiVersion, app } = require(path.join(__dirname, '..', '..'));
+const { Warehouse, apiVersion, app } = include(__dirname, '..', '..');
 const CATEGORY_BUILDING = 'Building';
 const TYPE_WAREHOUSE = 'Warehouse';
 

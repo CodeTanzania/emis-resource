@@ -2,11 +2,11 @@
 
 
 /* dependencies */
-const path = require('path');
 const _ = require('lodash');
 const { expect } = require('chai');
+const { include } = require('@lykmapipo/include');
 const { Schema } = require('mongoose');
-const { Item } = require(path.join(__dirname, '..', '..'));
+const { Item } = include(__dirname, '..', '..');
 
 
 describe('Item Schema', () => {

@@ -2,10 +2,10 @@
 
 
 /* dependencies */
-const path = require('path');
 const _ = require('lodash');
 const { expect } = require('chai');
-const { Item } = require(path.join(__dirname, '..', '..'));
+const { include } = require('@lykmapipo/include');
+const { Item } = include(__dirname, '..', '..');
 
 describe('Item Instance', () => {
 

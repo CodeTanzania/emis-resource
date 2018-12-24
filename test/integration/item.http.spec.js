@@ -2,11 +2,11 @@
 
 
 /* dependencies */
-const path = require('path');
 const request = require('supertest');
 const { expect } = require('chai');
+const { include } = require('@lykmapipo/include');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
-const { Item, apiVersion, app } = require(path.join(__dirname, '..', '..'));
+const { Item, apiVersion, app } = include(__dirname, '..', '..');
 
 
 describe('Item Rest API', function () {

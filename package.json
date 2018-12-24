@@ -1,6 +1,6 @@
 {
   "name": "@codetanzania/emis-resource",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A representation of item(i.e materials, services, staff, assets etc.) and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
   "main": "index.js",
   "scripts": {
@@ -105,7 +105,7 @@
   "devDependencies": {
     "@benmaruchu/faker": "^4.2.1",
     "@codetanzania/majifix-common": "^0.11.1",
-    "@lykmapipo/mongoose-test-helpers": ">=0.2.3",
+    "@lykmapipo/mongoose-test-helpers": ">=0.2.4",
     "chai": "^4.2.0",
     "grunt": "^1.0.3",
     "grunt-apidoc": "^0.11.0",
@@ -124,14 +124,14 @@
     "mongoose": ">=5.4.0"
   },
   "dependencies": {
-    "@codetanzania/emis-feature": ">=1.1.0",
-    "@codetanzania/emis-stakeholder": ">=1.2.1",
-    "@lykmapipo/env": "^0.3.2",
-    "@lykmapipo/express-common": ">=0.9.4",
-    "@lykmapipo/include": "^0.1.0",
+    "@codetanzania/emis-feature": ">=1.1.1",
+    "@codetanzania/emis-stakeholder": ">=1.2.2",
+    "@lykmapipo/env": "^0.3.3",
+    "@lykmapipo/express-common": ">=0.10.0",
+    "@lykmapipo/include": "^0.1.1",
     "async": ">=2.6.1",
     "lodash": ">=4.17.11",
-    "mongoose-rest-actions": ">=0.22.2",
+    "mongoose-rest-actions": ">=0.22.3",
     "randomcolor": ">=0.5.3"
   },
   "engines": {

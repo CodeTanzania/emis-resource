@@ -2,9 +2,9 @@
 
 
 /* dependencies */
-const path = require('path');
 const { expect } = require('chai');
-const { Adjustment } = require(path.join(__dirname, '..', '..'));
+const { include } = require('@lykmapipo/include');
+const { Adjustment } = include(__dirname, '..', '..');
 
 describe('Adjustment Instance', () => {
 
