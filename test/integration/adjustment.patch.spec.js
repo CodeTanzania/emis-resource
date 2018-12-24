@@ -2,12 +2,12 @@
 
 
 /* dependencies */
-const path = require('path');
 const { expect } = require('chai');
+const { include } = require('@lykmapipo/include');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
 const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
-const { Item, Stock, Adjustment } = require(path.join(__dirname, '..', '..'));
+const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 
 
 describe('Adjustment Static Patch', () => {
