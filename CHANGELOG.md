@@ -1,3 +1,9 @@
+#### 1.3.0 (2019-01-29)
+
+##### New Features
+
+*  add uom on item autopopulate ([f1770165](https://github.com/CodeTanzania/emis-resource/commit/f1770165c5384783622f3a5d87d6b82c87b65954))
+
 # 1.2.2 / 24-12-2018
 - Build latest apidoc
 - Force latest dependencies & audit fix
