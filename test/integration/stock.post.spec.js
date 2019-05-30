@@ -13,10 +13,18 @@ describe('Stock Static Post', () => {
 
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -26,6 +34,7 @@ describe('Stock Static Post', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);
@@ -60,10 +69,18 @@ describe('Stock Instance Post', () => {
 
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -73,6 +90,7 @@ describe('Stock Instance Post', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);

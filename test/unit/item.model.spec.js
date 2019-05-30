@@ -57,7 +57,7 @@ describe('Item Statics', () => {
     expect(Item.OPTION_AUTOPOPULATE).to.exist;
     expect(Item.OPTION_AUTOPOPULATE)
       .to.be.eql({
-        select: { type: 1, code: 1, name: 1, color: 1, icon: 1 },
+        select: { type: 1, code: 1, name: 1, uom: 1, color: 1, icon: 1 },
         maxDepth: Item.POPULATION_MAX_DEPTH
       });
   });

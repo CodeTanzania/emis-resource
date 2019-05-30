@@ -11,6 +11,7 @@ const path = require('path');
 const _ = require('lodash');
 const { include } = require('@lykmapipo/include');
 const { waterfall } = require('async');
+const { start, get, mount } = require('@lykmapipo/express-common');
 const { connect } = require('@lykmapipo/mongoose-common');
 const { Feature, featureRouter } = require('@codetanzania/emis-feature');
 const { Party, partyRouter } = require('@codetanzania/emis-stakeholder');
@@ -20,7 +21,10 @@ const {
   Adjustment,
   apiVersion,
   info,
-  app
+  adjustmentRouter,
+  itemRouter,
+  stockRouter,
+  warehouseRouter,
 } = include(__dirname, '..');
 
 
@@ -71,16 +75,18 @@ connect((error) => {
   ], (error, results) => {
 
     // expose module info
-    app.get('/', (request, response) => {
+    get('/', (request, response) => {
       response.status(200);
       response.json(info);
     });
 
-    app.mount(featureRouter);
-    app.mount(partyRouter);
+    mount(
+      featureRouter, partyRouter, adjustmentRouter,
+      itemRouter, stockRouter, warehouseRouter
+    );
 
     // fire the app
-    app.start((error, env) => {
+    start((error, env) => {
       console.log(`visit http://0.0.0.0:${env.PORT}`);
     });
 

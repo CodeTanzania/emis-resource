@@ -33,9 +33,8 @@
 /* dependencies */
 const _ = require('lodash');
 const { include } = require('@lykmapipo/include');
-const app = require('@lykmapipo/express-common');
+const { app, mount } = require('@lykmapipo/express-common');
 const { Feature: Warehouse } = require('@codetanzania/emis-feature');
-
 
 /* includes */
 const pkg = include(__dirname, 'package.json');
@@ -168,17 +167,17 @@ exports.adjustmentRouter = adjustmentRouter;
  * @since 1.0.0
  * @version 0.1.0
  */
-exports.apiVersion = itemRouter.apiVersion;
+exports.apiVersion = itemRouter.version;
 
 
 /* export app */
 Object.defineProperty(exports, 'app', {
   get() {
     /* @todo bind oauth middlewares authenticate, token, authorize */
-    app.mount(exports.warehouseRouter);
-    app.mount(exports.itemRouter);
-    app.mount(exports.stockRouter);
-    app.mount(exports.adjustmentRouter);
+    mount(exports.warehouseRouter);
+    mount(exports.itemRouter);
+    mount(exports.stockRouter);
+    mount(exports.adjustmentRouter);
     return app;
   }
 

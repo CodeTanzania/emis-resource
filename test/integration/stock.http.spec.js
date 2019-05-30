@@ -15,10 +15,18 @@ describe('Stock Rest API', function () {
 
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -29,6 +37,7 @@ describe('Stock Rest API', function () {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       stock.owner = owner;
@@ -46,7 +55,7 @@ describe('Stock Rest API', function () {
 
   it('should handle HTTP POST on /stocks', (done) => {
     request(app)
-      .post(`/v${apiVersion}/stocks`)
+      .post(`/${apiVersion}/stocks`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send(stock)
@@ -70,7 +79,7 @@ describe('Stock Rest API', function () {
 
   it('should handle HTTP GET on /stocks', (done) => {
     request(app)
-      .get(`/v${apiVersion}/stocks`)
+      .get(`/${apiVersion}/stocks`)
       .set('Accept', 'application/json')
       .expect(200)
       .expect('Content-Type', /json/)
@@ -93,7 +102,7 @@ describe('Stock Rest API', function () {
 
   it('should handle HTTP GET on /stocks/id:', (done) => {
     request(app)
-      .get(`/v${apiVersion}/stocks/${stock._id}`)
+      .get(`/${apiVersion}/stocks/${stock._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {
@@ -113,7 +122,7 @@ describe('Stock Rest API', function () {
   it('should handle HTTP PATCH on /stocks/id:', (done) => {
     const { minAllowed } = stock.fakeOnly('minAllowed');
     request(app)
-      .patch(`/v${apiVersion}/stocks/${stock._id}`)
+      .patch(`/${apiVersion}/stocks/${stock._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ minAllowed })
@@ -138,7 +147,7 @@ describe('Stock Rest API', function () {
   it('should handle HTTP PUT on /stocks/id:', (done) => {
     const { minAllowed } = stock.fakeOnly('minAllowed');
     request(app)
-      .put(`/v${apiVersion}/stocks/${stock._id}`)
+      .put(`/${apiVersion}/stocks/${stock._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ minAllowed })
@@ -162,7 +171,7 @@ describe('Stock Rest API', function () {
 
   it('should handle HTTP DELETE on /stocks/:id', (done) => {
     request(app)
-      .delete(`/v${apiVersion}/stocks/${stock._id}`)
+      .delete(`/${apiVersion}/stocks/${stock._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {
