@@ -16,11 +16,19 @@ describe('Adjustment Static Post', () => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -30,6 +38,7 @@ describe('Adjustment Static Post', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);
@@ -85,11 +94,19 @@ describe('Adjustment Instance Post', () => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -99,6 +116,7 @@ describe('Adjustment Instance Post', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);

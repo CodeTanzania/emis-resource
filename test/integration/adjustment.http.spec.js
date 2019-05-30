@@ -18,11 +18,19 @@ describe('Adjustment Rest API', () => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -32,6 +40,7 @@ describe('Adjustment Rest API', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);
@@ -65,7 +74,7 @@ describe('Adjustment Rest API', () => {
 
   it('should handle HTTP POST on /adjustments', (done) => {
     request(app)
-      .post(`/v${apiVersion}/adjustments`)
+      .post(`/${apiVersion}/adjustments`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send(adjustment)
@@ -89,7 +98,7 @@ describe('Adjustment Rest API', () => {
 
   it('should handle HTTP GET on /adjustments', (done) => {
     request(app)
-      .get(`/v${apiVersion}/adjustments`)
+      .get(`/${apiVersion}/adjustments`)
       .set('Accept', 'application/json')
       .expect(200)
       .expect('Content-Type', /json/)
@@ -112,7 +121,7 @@ describe('Adjustment Rest API', () => {
 
   it('should handle HTTP GET on /adjustments/id:', (done) => {
     request(app)
-      .get(`/v${apiVersion}/adjustments/${adjustment._id}`)
+      .get(`/${apiVersion}/adjustments/${adjustment._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {
@@ -132,7 +141,7 @@ describe('Adjustment Rest API', () => {
   it('should handle HTTP PATCH on /adjustments/id:', (done) => {
     const { quantity } = adjustment.fakeOnly('quantity');
     request(app)
-      .patch(`/v${apiVersion}/adjustments/${adjustment._id}`)
+      .patch(`/${apiVersion}/adjustments/${adjustment._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ quantity })
@@ -157,7 +166,7 @@ describe('Adjustment Rest API', () => {
   it('should handle HTTP PUT on /adjustments/id:', (done) => {
     const { quantity } = adjustment.fakeOnly('quantity');
     request(app)
-      .put(`/v${apiVersion}/adjustments/${adjustment._id}`)
+      .put(`/${apiVersion}/adjustments/${adjustment._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ quantity })
@@ -181,7 +190,7 @@ describe('Adjustment Rest API', () => {
 
   it('should handle HTTP DELETE on /adjustments/:id', (done) => {
     request(app)
-      .delete(`/v${apiVersion}/adjustments/${adjustment._id}`)
+      .delete(`/${apiVersion}/adjustments/${adjustment._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {

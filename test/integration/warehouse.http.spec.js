@@ -7,8 +7,8 @@ const { expect } = require('chai');
 const { include } = require('@lykmapipo/include');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
 const { Warehouse, apiVersion, app } = include(__dirname, '..', '..');
-const CATEGORY_BUILDING = 'Building';
-const TYPE_WAREHOUSE = 'Warehouse';
+const NATURE_BUILDING = 'Building';
+const FAMILY_WAREHOUSE = 'Warehouse';
 
 describe('Warehouse Rest API', function () {
 
@@ -18,12 +18,13 @@ describe('Warehouse Rest API', function () {
 
   it('should handle HTTP POST on /warehouses', (done) => {
     request(app)
-      .post(`/v${apiVersion}/warehouses`)
+      .post(`/${apiVersion}/warehouses`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send(warehouse)
       .expect(201)
       .end((error, response) => {
+        console.log(response.body);
         expect(error).to.not.exist;
         expect(response).to.exist;
 
@@ -32,8 +33,8 @@ describe('Warehouse Rest API', function () {
         expect(created._id).to.exist;
         expect(created._id).to.be.eql(warehouse._id);
         expect(created.name).to.exist;
-        expect(created.category).to.be.equal(CATEGORY_BUILDING);
-        expect(created.type).to.be.equal(TYPE_WAREHOUSE);
+        expect(created.nature).to.be.equal(NATURE_BUILDING);
+        expect(created.family).to.be.equal(FAMILY_WAREHOUSE);
 
         //set
         warehouse = created;
@@ -44,7 +45,7 @@ describe('Warehouse Rest API', function () {
 
   it('should handle HTTP GET on /warehouses', (done) => {
     request(app)
-      .get(`/v${apiVersion}/warehouses`)
+      .get(`/${apiVersion}/warehouses`)
       .set('Accept', 'application/json')
       .expect(200)
       .expect('Content-Type', /json/)
@@ -68,7 +69,7 @@ describe('Warehouse Rest API', function () {
 
   it('should handle HTTP GET on /warehouses/id:', (done) => {
     request(app)
-      .get(`/v${apiVersion}/warehouses/${warehouse._id}`)
+      .get(`/${apiVersion}/warehouses/${warehouse._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {
@@ -80,8 +81,8 @@ describe('Warehouse Rest API', function () {
         expect(found._id).to.exist;
         expect(found._id).to.be.eql(warehouse._id);
         expect(found.name).to.be.equal(warehouse.name);
-        expect(found.category).to.be.equal(CATEGORY_BUILDING);
-        expect(found.type).to.be.equal(TYPE_WAREHOUSE);
+        expect(found.nature).to.be.equal(NATURE_BUILDING);
+        expect(found.family).to.be.equal(FAMILY_WAREHOUSE);
 
         done(error, response);
       });
@@ -90,7 +91,7 @@ describe('Warehouse Rest API', function () {
   it('should handle HTTP PATCH on /warehouses/id:', (done) => {
     const { name } = warehouse.fakeOnly('name');
     request(app)
-      .patch(`/v${apiVersion}/warehouses/${warehouse._id}`)
+      .patch(`/${apiVersion}/warehouses/${warehouse._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ name })
@@ -104,8 +105,8 @@ describe('Warehouse Rest API', function () {
         expect(patched._id).to.exist;
         expect(patched._id).to.be.eql(warehouse._id);
         expect(patched.name).to.be.equal(warehouse.name);
-        expect(patched.category).to.be.equal(CATEGORY_BUILDING);
-        expect(patched.type).to.be.equal(TYPE_WAREHOUSE);
+        expect(patched.nature).to.be.equal(NATURE_BUILDING);
+        expect(patched.family).to.be.equal(FAMILY_WAREHOUSE);
 
         //set
         warehouse = patched;
@@ -117,7 +118,7 @@ describe('Warehouse Rest API', function () {
   it('should handle HTTP PUT on /warehouses/id:', (done) => {
     const { name } = warehouse.fakeOnly('name');
     request(app)
-      .put(`/v${apiVersion}/warehouses/${warehouse._id}`)
+      .put(`/${apiVersion}/warehouses/${warehouse._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ name })
@@ -131,8 +132,8 @@ describe('Warehouse Rest API', function () {
         expect(updated._id).to.exist;
         expect(updated._id).to.be.eql(warehouse._id);
         expect(updated.name).to.be.equal(warehouse.name);
-        expect(updated.category).to.be.equal(CATEGORY_BUILDING);
-        expect(updated.type).to.be.equal(TYPE_WAREHOUSE);
+        expect(updated.nature).to.be.equal(NATURE_BUILDING);
+        expect(updated.family).to.be.equal(FAMILY_WAREHOUSE);
 
         //set
         warehouse = updated;
@@ -143,7 +144,7 @@ describe('Warehouse Rest API', function () {
 
   it('should handle HTTP DELETE on /warehouses/:id', (done) => {
     request(app)
-      .delete(`/v${apiVersion}/warehouses/${warehouse._id}`)
+      .delete(`/${apiVersion}/warehouses/${warehouse._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {
@@ -155,8 +156,8 @@ describe('Warehouse Rest API', function () {
         expect(deleted._id).to.exist;
         expect(deleted._id).to.be.eql(warehouse._id);
         expect(deleted.name).to.be.equal(warehouse.name);
-        expect(deleted.category).to.be.equal(CATEGORY_BUILDING);
-        expect(deleted.type).to.be.equal(TYPE_WAREHOUSE);
+        expect(deleted.nature).to.be.equal(NATURE_BUILDING);
+        expect(deleted.family).to.be.equal(FAMILY_WAREHOUSE);
 
         done(error, response);
       });

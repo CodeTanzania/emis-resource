@@ -17,7 +17,7 @@ describe('Item Rest API', function () {
 
   it('should handle HTTP POST on /items', (done) => {
     request(app)
-      .post(`/v${apiVersion}/items`)
+      .post(`/${apiVersion}/items`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send(item)
@@ -41,7 +41,7 @@ describe('Item Rest API', function () {
 
   it('should handle HTTP GET on /items', (done) => {
     request(app)
-      .get(`/v${apiVersion}/items`)
+      .get(`/${apiVersion}/items`)
       .set('Accept', 'application/json')
       .expect(200)
       .expect('Content-Type', /json/)
@@ -64,7 +64,7 @@ describe('Item Rest API', function () {
 
   it('should handle HTTP GET on /items/id:', (done) => {
     request(app)
-      .get(`/v${apiVersion}/items/${item._id}`)
+      .get(`/${apiVersion}/items/${item._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {
@@ -84,7 +84,7 @@ describe('Item Rest API', function () {
   it('should handle HTTP PATCH on /items/id:', (done) => {
     const { name } = item.fakeOnly('name');
     request(app)
-      .patch(`/v${apiVersion}/items/${item._id}`)
+      .patch(`/${apiVersion}/items/${item._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ name })
@@ -109,7 +109,7 @@ describe('Item Rest API', function () {
   it('should handle HTTP PUT on /items/id:', (done) => {
     const { name } = item.fakeOnly('name');
     request(app)
-      .put(`/v${apiVersion}/items/${item._id}`)
+      .put(`/${apiVersion}/items/${item._id}`)
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({ name })
@@ -133,7 +133,7 @@ describe('Item Rest API', function () {
 
   it('should handle HTTP DELETE on /items/:id', (done) => {
     request(app)
-      .delete(`/v${apiVersion}/items/${item._id}`)
+      .delete(`/${apiVersion}/items/${item._id}`)
       .set('Accept', 'application/json')
       .expect(200)
       .end((error, response) => {

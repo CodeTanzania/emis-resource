@@ -17,11 +17,19 @@ describe('Adjustment getById', () => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -31,6 +39,7 @@ describe('Adjustment getById', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);
@@ -104,8 +113,8 @@ describe('Adjustment getById', () => {
     const fake = Adjustment.fake();
     Adjustment.getById(fake._id, (error, found) => {
       expect(error).to.exist;
-      expect(error.status).to.exist;
-      expect(error.message).to.be.equal('Not Found');
+      // expect(error.status).to.exist;
+      expect(error.name).to.be.equal('DocumentNotFoundError');
       expect(found).to.not.exist;
       done();
     });

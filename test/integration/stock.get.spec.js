@@ -15,10 +15,18 @@ describe('Stock Get', () => {
 
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let stocks = Stock.fake(32);
   let items = Item.fake(32);
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -28,6 +36,7 @@ describe('Stock Get', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);

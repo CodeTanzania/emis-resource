@@ -2,6 +2,7 @@
 
 
 /* dependencies */
+const _ = require('lodash');
 const { expect } = require('chai');
 const { include } = require('@lykmapipo/include');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
@@ -16,11 +17,19 @@ describe('Adjustment Static Put', () => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -30,6 +39,7 @@ describe('Adjustment Static Put', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);
@@ -77,11 +87,11 @@ describe('Adjustment Static Put', () => {
   });
 
   it('should throw if not exists', (done) => {
-    const fake = Adjustment.fake();
-    Adjustment.put(fake._id, fake, (error, updated) => {
+    const fake = Adjustment.fake().toObject();
+    Adjustment.put(fake._id, _.omit(fake, '_id'), (error, updated) => {
       expect(error).to.exist;
-      expect(error.status).to.exist;
-      expect(error.message).to.be.equal('Not Found');
+      // expect(error.status).to.exist;
+      expect(error.name).to.be.equal('DocumentNotFoundError');
       expect(updated).to.not.exist;
       done();
     });
@@ -100,11 +110,19 @@ describe('Adjustment Instance Put', () => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
 
+  let location = Feature.fake();
   let store = Feature.fake();
   let owner = Party.fake();
   let item = Item.fake();
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
+
+  before((done) => {
+    location.post((error, created) => {
+      location = created;
+      done(error, created);
+    });
+  });
 
   before((done) => {
     store.post((error, created) => {
@@ -114,6 +132,7 @@ describe('Adjustment Instance Put', () => {
   });
 
   before((done) => {
+    owner.location = location;
     owner.post((error, created) => {
       owner = created;
       done(error, created);
