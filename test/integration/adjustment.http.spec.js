@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const request = require('supertest');
 const { expect } = require('chai');
@@ -11,9 +10,7 @@ const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 const { apiVersion, app } = include(__dirname, '..', '..');
 
-
 describe('Adjustment Rest API', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -25,21 +22,21 @@ describe('Adjustment Rest API', () => {
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -47,14 +44,14 @@ describe('Adjustment Rest API', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -64,7 +61,7 @@ describe('Adjustment Rest API', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustment.item = item;
     adjustment.stock = stock;
     adjustment.store = store;
@@ -72,7 +69,7 @@ describe('Adjustment Rest API', () => {
     done();
   });
 
-  it('should handle HTTP POST on /adjustments', (done) => {
+  it('should handle HTTP POST on /adjustments', done => {
     request(app)
       .post(`/${apiVersion}/adjustments`)
       .set('Accept', 'application/json')
@@ -96,7 +93,7 @@ describe('Adjustment Rest API', () => {
       });
   });
 
-  it('should handle HTTP GET on /adjustments', (done) => {
+  it('should handle HTTP GET on /adjustments', done => {
     request(app)
       .get(`/${apiVersion}/adjustments`)
       .set('Accept', 'application/json')
@@ -119,7 +116,7 @@ describe('Adjustment Rest API', () => {
       });
   });
 
-  it('should handle HTTP GET on /adjustments/id:', (done) => {
+  it('should handle HTTP GET on /adjustments/id:', done => {
     request(app)
       .get(`/${apiVersion}/adjustments/${adjustment._id}`)
       .set('Accept', 'application/json')
@@ -138,7 +135,7 @@ describe('Adjustment Rest API', () => {
       });
   });
 
-  it('should handle HTTP PATCH on /adjustments/id:', (done) => {
+  it('should handle HTTP PATCH on /adjustments/id:', done => {
     const { quantity } = adjustment.fakeOnly('quantity');
     request(app)
       .patch(`/${apiVersion}/adjustments/${adjustment._id}`)
@@ -163,7 +160,7 @@ describe('Adjustment Rest API', () => {
       });
   });
 
-  it('should handle HTTP PUT on /adjustments/id:', (done) => {
+  it('should handle HTTP PUT on /adjustments/id:', done => {
     const { quantity } = adjustment.fakeOnly('quantity');
     request(app)
       .put(`/${apiVersion}/adjustments/${adjustment._id}`)
@@ -188,7 +185,7 @@ describe('Adjustment Rest API', () => {
       });
   });
 
-  it('should handle HTTP DELETE on /adjustments/:id', (done) => {
+  it('should handle HTTP DELETE on /adjustments/:id', done => {
     request(app)
       .delete(`/${apiVersion}/adjustments/${adjustment._id}`)
       .set('Accept', 'application/json')
@@ -209,5 +206,4 @@ describe('Adjustment Rest API', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });

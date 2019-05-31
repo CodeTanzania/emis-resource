@@ -1,10 +1,8 @@
 'use strict';
 
-
 /* ensure mongo uri */
 process.env.MONGODB_URI =
-  (process.env.MONGODB_URI || 'mongodb://localhost/emis-resource');
-
+  process.env.MONGODB_URI || 'mongodb://localhost/emis-resource';
 
 /* dependencies */
 const path = require('path');
@@ -27,9 +25,8 @@ const {
   warehouseRouter,
 } = include(__dirname, '..');
 
-
 // seeds
-const seedParties = (next) => Party.seed(next);
+const seedParties = next => Party.seed(next);
 const seedItems = (parties, next) => {
   Item.seed((error, items) => next(error, parties, items));
 };
@@ -63,33 +60,31 @@ const seedAdjustments = (items, stocks, next) => {
   Adjustment.insertMany(adjustments, next);
 };
 
-
 // establish mongodb connection
-connect((error) => {
-
+connect(error => {
   // seed
-  waterfall([
-    seedParties, seedItems,
-    seedFeatures, seedStocks,
-    seedAdjustments
-  ], (error, results) => {
+  waterfall(
+    [seedParties, seedItems, seedFeatures, seedStocks, seedAdjustments],
+    (error, results) => {
+      // expose module info
+      get('/', (request, response) => {
+        response.status(200);
+        response.json(info);
+      });
 
-    // expose module info
-    get('/', (request, response) => {
-      response.status(200);
-      response.json(info);
-    });
+      mount(
+        featureRouter,
+        partyRouter,
+        adjustmentRouter,
+        itemRouter,
+        stockRouter,
+        warehouseRouter
+      );
 
-    mount(
-      featureRouter, partyRouter, adjustmentRouter,
-      itemRouter, stockRouter, warehouseRouter
-    );
-
-    // fire the app
-    start((error, env) => {
-      console.log(`visit http://0.0.0.0:${env.PORT}`);
-    });
-
-  });
-
+      // fire the app
+      start((error, env) => {
+        console.log(`visit http://0.0.0.0:${env.PORT}`);
+      });
+    }
+  );
 });

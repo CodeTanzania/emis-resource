@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const { expect } = require('chai');
 const { include } = require('@lykmapipo/include');
@@ -10,7 +9,6 @@ const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 
 describe('Adjustment Static Delete', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -22,21 +20,21 @@ describe('Adjustment Static Delete', () => {
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -44,14 +42,14 @@ describe('Adjustment Static Delete', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -61,7 +59,7 @@ describe('Adjustment Static Delete', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustment.item = item;
     adjustment.stock = stock;
     adjustment.store = store;
@@ -72,7 +70,7 @@ describe('Adjustment Static Delete', () => {
     });
   });
 
-  it('should be able to delete', (done) => {
+  it('should be able to delete', done => {
     Adjustment.del(adjustment._id, (error, deleted) => {
       expect(error).to.not.exist;
       expect(deleted).to.exist;
@@ -81,7 +79,7 @@ describe('Adjustment Static Delete', () => {
     });
   });
 
-  it('should throw if not exists', (done) => {
+  it('should throw if not exists', done => {
     Adjustment.del(adjustment._id, (error, deleted) => {
       expect(error).to.exist;
       // expect(error.status).to.exist;
@@ -94,11 +92,9 @@ describe('Adjustment Static Delete', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });
 
 describe('Adjustment Instance Delete', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -110,21 +106,21 @@ describe('Adjustment Instance Delete', () => {
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -132,14 +128,14 @@ describe('Adjustment Instance Delete', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -149,7 +145,7 @@ describe('Adjustment Instance Delete', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustment.item = item;
     adjustment.stock = stock;
     adjustment.store = store;
@@ -160,7 +156,7 @@ describe('Adjustment Instance Delete', () => {
     });
   });
 
-  it('should be able to delete', (done) => {
+  it('should be able to delete', done => {
     adjustment.del((error, deleted) => {
       expect(error).to.not.exist;
       expect(deleted).to.exist;
@@ -169,7 +165,7 @@ describe('Adjustment Instance Delete', () => {
     });
   });
 
-  it('should throw if not exists', (done) => {
+  it('should throw if not exists', done => {
     adjustment.del((error, deleted) => {
       expect(error).to.not.exist;
       expect(deleted).to.exist;
@@ -181,5 +177,4 @@ describe('Adjustment Instance Delete', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });

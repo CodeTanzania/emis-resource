@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const _ = require('lodash');
 const { expect } = require('chai');
@@ -10,9 +9,7 @@ const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 
-
 describe('Adjustment Static Patch', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -24,21 +21,21 @@ describe('Adjustment Static Patch', () => {
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -46,14 +43,14 @@ describe('Adjustment Static Patch', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -63,7 +60,7 @@ describe('Adjustment Static Patch', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustment.item = item;
     adjustment.stock = stock;
     adjustment.store = store;
@@ -74,8 +71,7 @@ describe('Adjustment Static Patch', () => {
     });
   });
 
-
-  it('should be able to patch', (done) => {
+  it('should be able to patch', done => {
     adjustment = adjustment.fakeOnly('quantity');
     Adjustment.patch(adjustment._id, adjustment, (error, updated) => {
       expect(error).to.not.exist;
@@ -86,7 +82,7 @@ describe('Adjustment Static Patch', () => {
     });
   });
 
-  it('should throw if not exists', (done) => {
+  it('should throw if not exists', done => {
     const fake = Adjustment.fake().toObject();
     Adjustment.patch(fake._id, _.omit(fake, '_id'), (error, updated) => {
       expect(error).to.exist;
@@ -100,12 +96,9 @@ describe('Adjustment Static Patch', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });
 
-
 describe('Adjustment Instance Patch', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -117,21 +110,21 @@ describe('Adjustment Instance Patch', () => {
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -139,14 +132,14 @@ describe('Adjustment Instance Patch', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -156,7 +149,7 @@ describe('Adjustment Instance Patch', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustment.item = item;
     adjustment.stock = stock;
     adjustment.store = store;
@@ -167,8 +160,7 @@ describe('Adjustment Instance Patch', () => {
     });
   });
 
-
-  it('should be able to patch', (done) => {
+  it('should be able to patch', done => {
     adjustment = adjustment.fakeOnly('quantity');
     adjustment.patch((error, updated) => {
       expect(error).to.not.exist;
@@ -179,7 +171,7 @@ describe('Adjustment Instance Patch', () => {
     });
   });
 
-  it('should throw if not exists', (done) => {
+  it('should throw if not exists', done => {
     adjustment.patch((error, updated) => {
       expect(error).to.not.exist;
       expect(updated).to.exist;
@@ -191,5 +183,4 @@ describe('Adjustment Instance Patch', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });

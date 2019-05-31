@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const { expect } = require('chai');
 const { include } = require('@lykmapipo/include');
@@ -9,9 +8,7 @@ const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock } = include(__dirname, '..', '..');
 
-
 describe('Stock Schema', () => {
-
   it('should have store field', () => {
     const store = Stock.path('store');
 
@@ -94,5 +91,4 @@ describe('Stock Schema', () => {
     expect(maxAllowed.options.fake).to.exist;
     expect(maxAllowed.options.fake).to.be.an('object');
   });
-
 });

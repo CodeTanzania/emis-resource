@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const { expect } = require('chai');
 const { include } = require('@lykmapipo/include');
@@ -10,7 +9,6 @@ const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock } = include(__dirname, '..', '..');
 
 describe('Stock Static Post', () => {
-
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
   let location = Feature.fake();
@@ -19,21 +17,21 @@ describe('Stock Static Post', () => {
   let item = Item.fake();
   let stock = Stock.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -41,14 +39,14 @@ describe('Stock Static Post', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  it('should be able to post', (done) => {
+  it('should be able to post', done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -62,11 +60,9 @@ describe('Stock Static Post', () => {
   });
 
   after(done => clear('Stock', 'Item', 'Party', 'Feature', done));
-
 });
 
 describe('Stock Instance Post', () => {
-
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
   let location = Feature.fake();
@@ -75,21 +71,21 @@ describe('Stock Instance Post', () => {
   let item = Item.fake();
   let stock = Stock.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -97,14 +93,14 @@ describe('Stock Instance Post', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  it('should be able to post', (done) => {
+  it('should be able to post', done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -118,5 +114,4 @@ describe('Stock Instance Post', () => {
   });
 
   after(done => clear('Stock', 'Item', 'Party', 'Feature', done));
-
 });

@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const request = require('supertest');
 const { expect } = require('chai');
@@ -8,14 +7,12 @@ const { include } = require('@lykmapipo/include');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
 const { Item, apiVersion, app } = include(__dirname, '..', '..');
 
-
-describe('Item Rest API', function () {
-
+describe('Item Rest API', function() {
   before(done => clear('Item', done));
 
   let item = Item.fake();
 
-  it('should handle HTTP POST on /items', (done) => {
+  it('should handle HTTP POST on /items', done => {
     request(app)
       .post(`/${apiVersion}/items`)
       .set('Accept', 'application/json')
@@ -39,7 +36,7 @@ describe('Item Rest API', function () {
       });
   });
 
-  it('should handle HTTP GET on /items', (done) => {
+  it('should handle HTTP GET on /items', done => {
     request(app)
       .get(`/${apiVersion}/items`)
       .set('Accept', 'application/json')
@@ -62,7 +59,7 @@ describe('Item Rest API', function () {
       });
   });
 
-  it('should handle HTTP GET on /items/id:', (done) => {
+  it('should handle HTTP GET on /items/id:', done => {
     request(app)
       .get(`/${apiVersion}/items/${item._id}`)
       .set('Accept', 'application/json')
@@ -81,7 +78,7 @@ describe('Item Rest API', function () {
       });
   });
 
-  it('should handle HTTP PATCH on /items/id:', (done) => {
+  it('should handle HTTP PATCH on /items/id:', done => {
     const { name } = item.fakeOnly('name');
     request(app)
       .patch(`/${apiVersion}/items/${item._id}`)
@@ -106,7 +103,7 @@ describe('Item Rest API', function () {
       });
   });
 
-  it('should handle HTTP PUT on /items/id:', (done) => {
+  it('should handle HTTP PUT on /items/id:', done => {
     const { name } = item.fakeOnly('name');
     request(app)
       .put(`/${apiVersion}/items/${item._id}`)
@@ -131,7 +128,7 @@ describe('Item Rest API', function () {
       });
   });
 
-  it('should handle HTTP DELETE on /items/:id', (done) => {
+  it('should handle HTTP DELETE on /items/:id', done => {
     request(app)
       .delete(`/${apiVersion}/items/${item._id}`)
       .set('Accept', 'application/json')
@@ -150,5 +147,4 @@ describe('Item Rest API', function () {
   });
 
   after(done => clear('Item', done));
-
 });

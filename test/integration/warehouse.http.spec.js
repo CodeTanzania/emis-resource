@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const request = require('supertest');
 const { expect } = require('chai');
@@ -10,13 +9,12 @@ const { Warehouse, apiVersion, app } = include(__dirname, '..', '..');
 const NATURE_BUILDING = 'Building';
 const FAMILY_WAREHOUSE = 'Warehouse';
 
-describe('Warehouse Rest API', function () {
-
+describe('Warehouse Rest API', function() {
   before(done => clear('Feature', done));
 
   let warehouse = Warehouse.fake();
 
-  it('should handle HTTP POST on /warehouses', (done) => {
+  it('should handle HTTP POST on /warehouses', done => {
     request(app)
       .post(`/${apiVersion}/warehouses`)
       .set('Accept', 'application/json')
@@ -43,7 +41,7 @@ describe('Warehouse Rest API', function () {
       });
   });
 
-  it('should handle HTTP GET on /warehouses', (done) => {
+  it('should handle HTTP GET on /warehouses', done => {
     request(app)
       .get(`/${apiVersion}/warehouses`)
       .set('Accept', 'application/json')
@@ -67,7 +65,7 @@ describe('Warehouse Rest API', function () {
       });
   });
 
-  it('should handle HTTP GET on /warehouses/id:', (done) => {
+  it('should handle HTTP GET on /warehouses/id:', done => {
     request(app)
       .get(`/${apiVersion}/warehouses/${warehouse._id}`)
       .set('Accept', 'application/json')
@@ -88,7 +86,7 @@ describe('Warehouse Rest API', function () {
       });
   });
 
-  it('should handle HTTP PATCH on /warehouses/id:', (done) => {
+  it('should handle HTTP PATCH on /warehouses/id:', done => {
     const { name } = warehouse.fakeOnly('name');
     request(app)
       .patch(`/${apiVersion}/warehouses/${warehouse._id}`)
@@ -115,7 +113,7 @@ describe('Warehouse Rest API', function () {
       });
   });
 
-  it('should handle HTTP PUT on /warehouses/id:', (done) => {
+  it('should handle HTTP PUT on /warehouses/id:', done => {
     const { name } = warehouse.fakeOnly('name');
     request(app)
       .put(`/${apiVersion}/warehouses/${warehouse._id}`)
@@ -142,7 +140,7 @@ describe('Warehouse Rest API', function () {
       });
   });
 
-  it('should handle HTTP DELETE on /warehouses/:id', (done) => {
+  it('should handle HTTP DELETE on /warehouses/:id', done => {
     request(app)
       .delete(`/${apiVersion}/warehouses/${warehouse._id}`)
       .set('Accept', 'application/json')
@@ -164,5 +162,4 @@ describe('Warehouse Rest API', function () {
   });
 
   after(done => clear('Feature', done));
-
 });

@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * @name emis-resource
  * @module emis-resource
@@ -29,7 +28,6 @@
  *
  */
 
-
 /* dependencies */
 const _ = require('lodash');
 const { include } = require('@lykmapipo/include');
@@ -46,7 +44,6 @@ const itemRouter = include(__dirname, 'lib', 'item.http.router');
 const stockRouter = include(__dirname, 'lib', 'stock.http.router');
 const adjustmentRouter = include(__dirname, 'lib', 'adjustment.http.router');
 
-
 /**
  * @name info
  * @description package information
@@ -56,11 +53,20 @@ const adjustmentRouter = include(__dirname, 'lib', 'adjustment.http.router');
  * @since 1.0.0
  * @version 0.1.0
  */
-exports.info = _.merge({}, _.pick(pkg, [
-  'name', 'description', 'version', 'license',
-  'homepage', 'repository', 'bugs', 'sandbox', 'contributors'
-]));
-
+exports.info = _.merge(
+  {},
+  _.pick(pkg, [
+    'name',
+    'description',
+    'version',
+    'license',
+    'homepage',
+    'repository',
+    'bugs',
+    'sandbox',
+    'contributors',
+  ])
+);
 
 /**
  * @name Warehouse
@@ -73,7 +79,6 @@ exports.info = _.merge({}, _.pick(pkg, [
  */
 exports.Warehouse = Warehouse;
 
-
 /**
  * @name Item
  * @description Item model
@@ -84,7 +89,6 @@ exports.Warehouse = Warehouse;
  * @version 0.1.0
  */
 exports.Item = Item;
-
 
 /**
  * @name Stock
@@ -97,7 +101,6 @@ exports.Item = Item;
  */
 exports.Stock = Stock;
 
-
 /**
  * @name Adjustment
  * @description Adjustment model
@@ -108,7 +111,6 @@ exports.Stock = Stock;
  * @version 0.1.0
  */
 exports.Adjustment = Adjustment;
-
 
 /**
  * @name warehouseRouter
@@ -121,7 +123,6 @@ exports.Adjustment = Adjustment;
  */
 exports.warehouseRouter = warehouseRouter;
 
-
 /**
  * @name itemRouter
  * @description item http router
@@ -132,7 +133,6 @@ exports.warehouseRouter = warehouseRouter;
  * @version 0.1.0
  */
 exports.itemRouter = itemRouter;
-
 
 /**
  * @name stockRouter
@@ -145,7 +145,6 @@ exports.itemRouter = itemRouter;
  */
 exports.stockRouter = stockRouter;
 
-
 /**
  * @name adjustmentRouter
  * @description adjustment http router
@@ -156,7 +155,6 @@ exports.stockRouter = stockRouter;
  * @version 0.1.0
  */
 exports.adjustmentRouter = adjustmentRouter;
-
 
 /**
  * @name apiVersion
@@ -169,7 +167,6 @@ exports.adjustmentRouter = adjustmentRouter;
  */
 exports.apiVersion = itemRouter.version;
 
-
 /* export app */
 Object.defineProperty(exports, 'app', {
   get() {
@@ -179,6 +176,5 @@ Object.defineProperty(exports, 'app', {
     mount(exports.stockRouter);
     mount(exports.adjustmentRouter);
     return app;
-  }
-
+  },
 });
