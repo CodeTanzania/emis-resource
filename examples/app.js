@@ -5,7 +5,6 @@ process.env.MONGODB_URI =
   process.env.MONGODB_URI || 'mongodb://localhost/emis-resource';
 
 /* dependencies */
-const path = require('path');
 const _ = require('lodash');
 const { include } = require('@lykmapipo/include');
 const { waterfall } = require('async');
