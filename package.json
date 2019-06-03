@@ -1,6 +1,6 @@
 {
   "name": "@codetanzania/emis-resource",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A representation of item(i.e materials, services, staff, assets etc.) and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
   "main": "index.js",
   "scripts": {
@@ -60,46 +60,22 @@
         "resource": "Item",
         "schema": "https://emis-resource.herokuapp.com/v1/items/schema",
         "link": "https://emis-resource.herokuapp.com/v1/items",
-        "scopes": [
-          "item:*"
-        ],
-        "methods": [
-          "get",
-          "post",
-          "put",
-          "patch",
-          "delete"
-        ]
+        "scopes": ["item:*"],
+        "methods": ["get", "post", "put", "patch", "delete"]
       },
       {
         "resource": "Stock",
         "schema": "https://emis-resource.herokuapp.com/v1/stocks/schema",
         "link": "https://emis-resource.herokuapp.com/v1/stocks",
-        "scopes": [
-          "stock:*"
-        ],
-        "methods": [
-          "get",
-          "post",
-          "put",
-          "patch",
-          "delete"
-        ]
+        "scopes": ["stock:*"],
+        "methods": ["get", "post", "put", "patch", "delete"]
       },
       {
         "resource": "Adjustment",
         "schema": "https://emis-resource.herokuapp.com/v1/adjustments/schema",
         "link": "https://emis-resource.herokuapp.com/v1/adjustments",
-        "scopes": [
-          "adjustment:*"
-        ],
-        "methods": [
-          "get",
-          "post",
-          "put",
-          "patch",
-          "delete"
-        ]
+        "scopes": ["adjustment:*"],
+        "methods": ["get", "post", "put", "patch", "delete"]
       }
     ]
   },
