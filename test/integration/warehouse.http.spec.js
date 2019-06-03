@@ -22,7 +22,6 @@ describe('Warehouse Rest API', function() {
       .send(warehouse)
       .expect(201)
       .end((error, response) => {
-        console.log(response.body);
         expect(error).to.not.exist;
         expect(response).to.exist;
 
