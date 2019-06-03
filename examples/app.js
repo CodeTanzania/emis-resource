@@ -23,7 +23,6 @@ const {
   warehouseRouter,
 } = include(__dirname, '..');
 
-
 // seeds
 const seedParties = (features, next) => {
   let parties = include(__dirname, 'seeds', 'parties');
@@ -43,16 +42,16 @@ const seedItems = (parties, features, next) => {
   Item.seed((error, items) => next(error, parties, features, items));
 };
 
-const seedFeatures = (next) => {
+const seedFeatures = next => {
   let features = include(__dirname, 'seeds', 'features');
-  Feature.seed(features,(error, seeded) => {
+  Feature.seed(features, (error, seeded) => {
     features = seeded;
     next(error, features);
   });
 };
 
 const seedStocks = (parties, features, items, next) => {
-  const stocks = _.map(items, (item) => {
+  const stocks = _.map(items, item => {
     return {
       store: _.sample(features),
       owner: _.sample(parties),
@@ -82,7 +81,7 @@ const seedAdjustments = (items, stocks, next) => {
 connect(error => {
   // seed
   waterfall(
-    [ seedFeatures, seedParties, /*seedItems, seedStocks, seedAdjustments*/],
+    [seedFeatures, seedParties, seedItems, seedStocks, seedAdjustments],
     (error, results) => {
       // expose module info
       get('/', (request, response) => {
