@@ -1,13 +1,14 @@
 {
   "name": "@codetanzania/emis-resource",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A representation of item(i.e materials, services, staff, assets etc.) and it stock that may be consumed or made available in emergency(or disaster) management(or event).",
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
     "integration": "grunt integration",
     "dev": "BASE_PATH=./examples node ./examples/app.js",
-    "format": "prettier --write \"{lib,test,.}/**/*.js\" --loglevel silent"
+    "format": "prettier --write \"{lib,test,.}/**/*.js\" --loglevel silent",
+    "changelog": "changelog"
   },
   "repository": {
     "type": "git",
@@ -108,6 +109,7 @@
     "@codetanzania/majifix-common": "^0.12.4",
     "@lykmapipo/mongoose-test-helpers": ">=0.7.6",
     "chai": "^4.2.0",
+    "generate-changelog": "^1.7.1",
     "grunt": "^1.0.4",
     "grunt-apidoc": "^0.11.0",
     "grunt-contrib-jshint": "^2.1.0",
