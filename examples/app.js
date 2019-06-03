@@ -16,7 +16,6 @@ const {
   Item,
   Stock,
   Adjustment,
-  apiVersion,
   info,
   adjustmentRouter,
   itemRouter,
@@ -25,18 +24,37 @@ const {
 } = include(__dirname, '..');
 
 // seeds
-const seedParties = next => Party.seed(next);
-const seedItems = (parties, next) => {
-  Item.seed((error, items) => next(error, parties, items));
+const seedParties = (features, next) => {
+  let parties = include(__dirname, 'seeds', 'parties');
+
+  parties = _.map(parties, party => {
+    party.location = _.sample(features);
+    return party;
+  });
+
+  Party.seed(parties, (error, seeded) => {
+    parties = seeded;
+    next(error, parties, features);
+  });
 };
-const seedFeatures = (parties, items, next) => {
-  Feature.seed((error, features) => next(error, parties, items, features));
+
+const seedItems = (parties, features, next) => {
+  Item.seed((error, items) => next(error, parties, features, items));
 };
-const seedStocks = (parties, items, features, next) => {
-  const stocks = _.map(items, (item, index) => {
+
+const seedFeatures = next => {
+  let features = include(__dirname, 'seeds', 'features');
+  Feature.seed(features, (error, seeded) => {
+    features = seeded;
+    next(error, features);
+  });
+};
+
+const seedStocks = (parties, features, items, next) => {
+  const stocks = _.map(items, item => {
     return {
-      store: features[index % features.length],
-      owner: parties[index % parties.length],
+      store: _.sample(features),
+      owner: _.sample(parties),
       item: item,
       quantity: Math.ceil(Math.random() * 1000),
       minAllowed: Math.ceil(Math.random() * 10),
@@ -63,7 +81,7 @@ const seedAdjustments = (items, stocks, next) => {
 connect(error => {
   // seed
   waterfall(
-    [seedParties, seedItems, seedFeatures, seedStocks, seedAdjustments],
+    [seedFeatures, seedParties, seedItems, seedStocks, seedAdjustments],
     (error, results) => {
       // expose module info
       get('/', (request, response) => {
