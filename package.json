@@ -7,7 +7,8 @@
     "test": "grunt test",
     "integration": "grunt integration",
     "dev": "BASE_PATH=./examples node ./examples/app.js",
-    "format": "prettier --write \"{lib,test,.}/**/*.js\" --loglevel silent"
+    "format": "prettier --write \"{lib,test,.}/**/*.js\" --loglevel silent",
+    "changelog": "changelog"
   },
   "repository": {
     "type": "git",
@@ -60,22 +61,46 @@
         "resource": "Item",
         "schema": "https://emis-resource.herokuapp.com/v1/items/schema",
         "link": "https://emis-resource.herokuapp.com/v1/items",
-        "scopes": ["item:*"],
-        "methods": ["get", "post", "put", "patch", "delete"]
+        "scopes": [
+          "item:*"
+        ],
+        "methods": [
+          "get",
+          "post",
+          "put",
+          "patch",
+          "delete"
+        ]
       },
       {
         "resource": "Stock",
         "schema": "https://emis-resource.herokuapp.com/v1/stocks/schema",
         "link": "https://emis-resource.herokuapp.com/v1/stocks",
-        "scopes": ["stock:*"],
-        "methods": ["get", "post", "put", "patch", "delete"]
+        "scopes": [
+          "stock:*"
+        ],
+        "methods": [
+          "get",
+          "post",
+          "put",
+          "patch",
+          "delete"
+        ]
       },
       {
         "resource": "Adjustment",
         "schema": "https://emis-resource.herokuapp.com/v1/adjustments/schema",
         "link": "https://emis-resource.herokuapp.com/v1/adjustments",
-        "scopes": ["adjustment:*"],
-        "methods": ["get", "post", "put", "patch", "delete"]
+        "scopes": [
+          "adjustment:*"
+        ],
+        "methods": [
+          "get",
+          "post",
+          "put",
+          "patch",
+          "delete"
+        ]
       }
     ]
   },
@@ -84,6 +109,7 @@
     "@codetanzania/majifix-common": "^0.12.4",
     "@lykmapipo/mongoose-test-helpers": ">=0.7.6",
     "chai": "^4.2.0",
+    "generate-changelog": "^1.7.1",
     "grunt": "^1.0.4",
     "grunt-apidoc": "^0.11.0",
     "grunt-contrib-jshint": "^2.1.0",
