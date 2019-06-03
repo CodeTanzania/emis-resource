@@ -28,7 +28,7 @@ const seedParties = (features, next) => {
   let parties = include(__dirname, 'seeds', 'parties');
 
   parties = _.map(parties, party => {
-    party.location = _.sample(features).toObject(); // todo: examine this
+    party.location = _.sample(features);
     return party;
   });
 
