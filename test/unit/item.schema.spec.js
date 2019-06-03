@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const _ = require('lodash');
 const { expect } = require('chai');
@@ -8,9 +7,7 @@ const { include } = require('@lykmapipo/include');
 const { Schema } = require('mongoose');
 const { Item } = include(__dirname, '..', '..');
 
-
 describe('Item Schema', () => {
-
   it('should have type field', () => {
     const type = Item.path('type');
 
@@ -132,7 +129,6 @@ describe('Item Schema', () => {
     expect(maxStockAllowed.options.fake).to.be.an('object');
   });
 
-
   it('should have color field', () => {
     const color = Item.path('color');
 
@@ -175,5 +171,4 @@ describe('Item Schema', () => {
     expect(expirable.options.default).to.be.false;
     expect(expirable.options.fake).to.not.exist;
   });
-
 });

@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const _ = require('lodash');
 const { expect } = require('chai');
@@ -10,9 +9,7 @@ const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 
-
 describe('Adjustment Get', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -24,21 +21,21 @@ describe('Adjustment Get', () => {
   let stocks = Stock.fake(32);
   let adjustments = Adjustment.fake(32);
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -46,14 +43,14 @@ describe('Adjustment Get', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     Item.insertMany(items, (error, created) => {
       items = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stocks = _.map(stocks, (stock, index) => {
       stock.store = store;
       stock.owner = owner;
@@ -66,7 +63,7 @@ describe('Adjustment Get', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustments = _.map(adjustments, (adjustment, index) => {
       adjustment.item = items[index];
       adjustment.stock = stocks[index];
@@ -80,7 +77,7 @@ describe('Adjustment Get', () => {
     });
   });
 
-  it('should be able to get without options', (done) => {
+  it('should be able to get without options', done => {
     Adjustment.get((error, results) => {
       expect(error).to.not.exist;
       expect(results).to.exist;
@@ -97,13 +94,14 @@ describe('Adjustment Get', () => {
       expect(results.pages).to.exist;
       expect(results.pages).to.be.equal(4);
       expect(results.lastModified).to.exist;
-      expect(_.maxBy(results.data, 'updatedAt').updatedAt)
-        .to.be.at.most(results.lastModified);
+      expect(_.maxBy(results.data, 'updatedAt').updatedAt).to.be.at.most(
+        results.lastModified
+      );
       done(error, results);
     });
   });
 
-  it('should be able to get with options', (done) => {
+  it('should be able to get with options', done => {
     const options = { page: 1, limit: 20 };
     Adjustment.get(options, (error, results) => {
       expect(error).to.not.exist;
@@ -121,13 +119,14 @@ describe('Adjustment Get', () => {
       expect(results.pages).to.exist;
       expect(results.pages).to.be.equal(2);
       expect(results.lastModified).to.exist;
-      expect(_.maxBy(results.data, 'updatedAt').updatedAt)
-        .to.be.at.most(results.lastModified);
+      expect(_.maxBy(results.data, 'updatedAt').updatedAt).to.be.at.most(
+        results.lastModified
+      );
       done(error, results);
     });
   });
 
-  it.skip('should be able to search with options', (done) => {
+  it.skip('should be able to search with options', done => {
     // wait search by relations
     const options = { filter: { q: items[0].name } };
     Adjustment.get(options, (error, results) => {
@@ -146,13 +145,14 @@ describe('Adjustment Get', () => {
       expect(results.pages).to.exist;
       expect(results.pages).to.be.equal(1);
       expect(results.lastModified).to.exist;
-      expect(_.maxBy(results.data, 'updatedAt').updatedAt)
-        .to.be.at.most(results.lastModified);
+      expect(_.maxBy(results.data, 'updatedAt').updatedAt).to.be.at.most(
+        results.lastModified
+      );
       done(error, results);
     });
   });
 
-  it.skip('should parse filter options', (done) => {
+  it.skip('should parse filter options', done => {
     // wait search by relations
     const options = { filter: { name: items[0].name } };
     Adjustment.get(options, (error, results) => {
@@ -171,8 +171,9 @@ describe('Adjustment Get', () => {
       expect(results.pages).to.exist;
       expect(results.pages).to.be.equal(1);
       expect(results.lastModified).to.exist;
-      expect(_.maxBy(results.data, 'updatedAt').updatedAt)
-        .to.be.at.most(results.lastModified);
+      expect(_.maxBy(results.data, 'updatedAt').updatedAt).to.be.at.most(
+        results.lastModified
+      );
       done(error, results);
     });
   });
@@ -180,5 +181,4 @@ describe('Adjustment Get', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });

@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const request = require('supertest');
 const { expect } = require('chai');
@@ -10,9 +9,7 @@ const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock, apiVersion, app } = include(__dirname, '..', '..');
 
-
-describe('Stock Rest API', function () {
-
+describe('Stock Rest API', function() {
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
   let location = Feature.fake();
@@ -21,14 +18,14 @@ describe('Stock Rest API', function () {
   let item = Item.fake();
   let stock = Stock.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       stock.store = store;
@@ -36,7 +33,7 @@ describe('Stock Rest API', function () {
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -45,7 +42,7 @@ describe('Stock Rest API', function () {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       stock.item = item;
@@ -53,7 +50,7 @@ describe('Stock Rest API', function () {
     });
   });
 
-  it('should handle HTTP POST on /stocks', (done) => {
+  it('should handle HTTP POST on /stocks', done => {
     request(app)
       .post(`/${apiVersion}/stocks`)
       .set('Accept', 'application/json')
@@ -77,7 +74,7 @@ describe('Stock Rest API', function () {
       });
   });
 
-  it('should handle HTTP GET on /stocks', (done) => {
+  it('should handle HTTP GET on /stocks', done => {
     request(app)
       .get(`/${apiVersion}/stocks`)
       .set('Accept', 'application/json')
@@ -100,7 +97,7 @@ describe('Stock Rest API', function () {
       });
   });
 
-  it('should handle HTTP GET on /stocks/id:', (done) => {
+  it('should handle HTTP GET on /stocks/id:', done => {
     request(app)
       .get(`/${apiVersion}/stocks/${stock._id}`)
       .set('Accept', 'application/json')
@@ -119,7 +116,7 @@ describe('Stock Rest API', function () {
       });
   });
 
-  it('should handle HTTP PATCH on /stocks/id:', (done) => {
+  it('should handle HTTP PATCH on /stocks/id:', done => {
     const { minAllowed } = stock.fakeOnly('minAllowed');
     request(app)
       .patch(`/${apiVersion}/stocks/${stock._id}`)
@@ -144,7 +141,7 @@ describe('Stock Rest API', function () {
       });
   });
 
-  it('should handle HTTP PUT on /stocks/id:', (done) => {
+  it('should handle HTTP PUT on /stocks/id:', done => {
     const { minAllowed } = stock.fakeOnly('minAllowed');
     request(app)
       .put(`/${apiVersion}/stocks/${stock._id}`)
@@ -169,7 +166,7 @@ describe('Stock Rest API', function () {
       });
   });
 
-  it('should handle HTTP DELETE on /stocks/:id', (done) => {
+  it('should handle HTTP DELETE on /stocks/:id', done => {
     request(app)
       .delete(`/${apiVersion}/stocks/${stock._id}`)
       .set('Accept', 'application/json')
@@ -188,5 +185,4 @@ describe('Stock Rest API', function () {
   });
 
   after(done => clear('Stock', 'Item', 'Party', 'Feature', done));
-
 });

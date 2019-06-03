@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const { expect } = require('chai');
 const { include } = require('@lykmapipo/include');
@@ -8,9 +7,7 @@ const { Schema } = require('mongoose');
 const { Feature } = require('@codetanzania/emis-feature');
 const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 
-
 describe('Adjustment Schema', () => {
-
   it('should have type field', () => {
     const type = Adjustment.path('type');
 
@@ -143,5 +140,4 @@ describe('Adjustment Schema', () => {
     expect(remarks.options.fake).to.exist;
     expect(remarks.options.fake).to.be.an('object');
   });
-
 });

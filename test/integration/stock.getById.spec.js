@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const _ = require('lodash');
 const { expect } = require('chai');
@@ -10,9 +9,7 @@ const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock } = include(__dirname, '..', '..');
 
-
 describe('Stock getById', () => {
-
   before(done => clear('Stock', 'Item', 'Party', 'Feature', done));
 
   let location = Feature.fake();
@@ -21,21 +18,21 @@ describe('Stock getById', () => {
   let item = Item.fake();
   let stock = Stock.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -43,14 +40,14 @@ describe('Stock getById', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -60,7 +57,7 @@ describe('Stock getById', () => {
     });
   });
 
-  it('should be able to get an instance', (done) => {
+  it('should be able to get an instance', done => {
     Stock.getById(stock._id, (error, found) => {
       expect(error).to.not.exist;
       expect(found).to.exist;
@@ -69,10 +66,10 @@ describe('Stock getById', () => {
     });
   });
 
-  it('should be able to get with options', (done) => {
+  it('should be able to get with options', done => {
     const options = {
       _id: stock._id,
-      select: 'item'
+      select: 'item',
     };
 
     Stock.getById(options, (error, found) => {
@@ -84,19 +81,14 @@ describe('Stock getById', () => {
       //...assert selection
       const fields = _.keys(found.toObject());
       expect(fields).to.have.length.at.least(2);
-      _.map([
-        'minAllowed',
-        'createdAt',
-        'updatedAt'
-      ], function (field) {
+      _.map(['minAllowed', 'createdAt', 'updatedAt'], function(field) {
         expect(fields).to.not.include(field);
       });
       done(error, found);
     });
-
   });
 
-  it('should throw if not exists', (done) => {
+  it('should throw if not exists', done => {
     const fake = Stock.fake();
     Stock.getById(fake._id, (error, found) => {
       expect(error).to.exist;
@@ -108,5 +100,4 @@ describe('Stock getById', () => {
   });
 
   after(done => clear('Stock', 'Item', 'Party', 'Feature', done));
-
 });

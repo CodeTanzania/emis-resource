@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const _ = require('lodash');
 const { expect } = require('chai');
@@ -8,21 +7,19 @@ const { include } = require('@lykmapipo/include');
 const { clear } = require('@lykmapipo/mongoose-test-helpers');
 const { Item } = include(__dirname, '..', '..');
 
-
 describe('Item Static Patch', () => {
-
   before(done => clear('Item', done));
 
   let item = Item.fake();
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  it('should be able to patch', (done) => {
+  it('should be able to patch', done => {
     item = item.fakeOnly('name');
     Item.patch(item._id, item, (error, updated) => {
       expect(error).to.not.exist;
@@ -33,7 +30,7 @@ describe('Item Static Patch', () => {
     });
   });
 
-  it('should throw if not exists', (done) => {
+  it('should throw if not exists', done => {
     const fake = Item.fake().toObject();
     Item.patch(fake._id, _.omit(fake, '_id'), (error, updated) => {
       expect(error).to.exist;
@@ -45,24 +42,21 @@ describe('Item Static Patch', () => {
   });
 
   after(done => clear('Item', done));
-
 });
 
-
 describe('Item Instance Patch', () => {
-
   before(done => clear('Item', done));
 
   let item = Item.fake();
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  it('should be able to patch', (done) => {
+  it('should be able to patch', done => {
     item = item.fakeOnly('name');
     item.patch((error, updated) => {
       expect(error).to.not.exist;
@@ -73,7 +67,7 @@ describe('Item Instance Patch', () => {
     });
   });
 
-  it('should throw if not exists', (done) => {
+  it('should throw if not exists', done => {
     item.patch((error, updated) => {
       expect(error).to.not.exist;
       expect(updated).to.exist;
@@ -83,5 +77,4 @@ describe('Item Instance Patch', () => {
   });
 
   after(done => clear('Item', done));
-
 });

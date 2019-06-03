@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* dependencies */
 const { expect } = require('chai');
 const { include } = require('@lykmapipo/include');
@@ -9,9 +8,7 @@ const { Feature } = require('@codetanzania/emis-feature');
 const { Party } = require('@codetanzania/emis-stakeholder');
 const { Item, Stock, Adjustment } = include(__dirname, '..', '..');
 
-
 describe('Adjustment Static Post', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -23,21 +20,21 @@ describe('Adjustment Static Post', () => {
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -45,14 +42,14 @@ describe('Adjustment Static Post', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -62,7 +59,7 @@ describe('Adjustment Static Post', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustment.item = item;
     adjustment.stock = stock;
     adjustment.store = store;
@@ -70,8 +67,7 @@ describe('Adjustment Static Post', () => {
     done();
   });
 
-
-  it('should be able to post', (done) => {
+  it('should be able to post', done => {
     Adjustment.post(adjustment, (error, updated) => {
       expect(error).to.not.exist;
       expect(updated).to.exist;
@@ -84,12 +80,9 @@ describe('Adjustment Static Post', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });
 
-
 describe('Adjustment Instance Post', () => {
-
   before(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
@@ -101,21 +94,21 @@ describe('Adjustment Instance Post', () => {
   let stock = Stock.fake();
   let adjustment = Adjustment.fake();
 
-  before((done) => {
+  before(done => {
     location.post((error, created) => {
       location = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     store.post((error, created) => {
       store = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     owner.location = location;
     owner.post((error, created) => {
       owner = created;
@@ -123,14 +116,14 @@ describe('Adjustment Instance Post', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     item.post((error, created) => {
       item = created;
       done(error, created);
     });
   });
 
-  before((done) => {
+  before(done => {
     stock.store = store;
     stock.owner = owner;
     stock.item = item;
@@ -140,7 +133,7 @@ describe('Adjustment Instance Post', () => {
     });
   });
 
-  before((done) => {
+  before(done => {
     adjustment.item = item;
     adjustment.stock = stock;
     adjustment.store = store;
@@ -148,8 +141,7 @@ describe('Adjustment Instance Post', () => {
     done();
   });
 
-
-  it('should be able to post', (done) => {
+  it('should be able to post', done => {
     adjustment.post((error, updated) => {
       expect(error).to.not.exist;
       expect(updated).to.exist;
@@ -162,5 +154,4 @@ describe('Adjustment Instance Post', () => {
   after(done => {
     clear('Adjustment', 'Stock', 'Item', 'Party', 'Feature', done);
   });
-
 });
